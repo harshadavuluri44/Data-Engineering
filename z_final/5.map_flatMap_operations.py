@@ -1,9 +1,6 @@
 '''
 
-mapPartitions(), groupByKey(), reduceByKey() are RDD operations only, they are not availanle in
-DataFrame API
------------------------------------------------------------------------------------------------
-3. map() - Transformation
+1. map() - Transformation
 
 * Applies a function to each element of RDD/ DataFrame
 * Output : one element per input element (1-to-1 mapping)
@@ -16,7 +13,8 @@ mapped_rdd = rdd.map(lambda x:[x,x*2])
 
 [[1,1],[2,4],[3,6]]
 ----------------------------------------------------------------------------------------------
-4. flatMap()
+
+2. flatMap()
 
 Works same as map, Applies a function to each element, but function return multiple elements or none
 * output :- flattened list of results
@@ -40,7 +38,7 @@ DIFF B/W MAP() AND FLATMAP() IN SPARK
 
 ------------------------------------------------------------------------------------------
 
-1. mapPartitions() - Applies function to each partition independently.
+3. mapPartitions() - Applies function to each partition independently.
 
 syntax :- rdd.mapPartitions(func)
 
@@ -54,7 +52,7 @@ def func(iterator):
 mapped_rdd = rdd.mapPartitions(func)
 -------------------------------------------------------------------------------------------------
 
-2. groupByKey() :- groups all values for each key together 
+4. groupByKey() :- groups all values for each key together 
 
     similar to groupBy in dataframe
 
@@ -65,5 +63,6 @@ grouped_rdd = rdd.groupByKey()
 grouped_rdd = [('a',[1,3,9]), ('b',6), ('c',7)]
 -------------------------------------------------------------------------------------------
 
+5. reduceByKey() :- 
 
 '''

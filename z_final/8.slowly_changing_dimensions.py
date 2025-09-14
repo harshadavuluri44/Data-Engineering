@@ -1,3 +1,4 @@
+'''
 Slowly Changing Dimensions (SCD) 
 
 SCD's are strategies used in Data Warehousing to handle changes in dimension table attributes over
@@ -21,17 +22,32 @@ SCD Types
     Example :- Customer changes city -> update the city column directly
     Implementation in Pyspark/Databricks : Use Delta Lake MERGE INTO to overwrite existing record.
 
-    SCD Type 2 - Maintain full history
+--------------------------------------------------------------------------------------------------
+
+SCD Type 2 - Maintain full history
 
     * Add a new row when a change happens
     * Maintain columns like: start_date, end_date, is_current
     * Keeps entire lifcycle and history of each dimension record
 
-    Example :- Id     Name    City     StartDate(new column)   EndDate,      IsCurrent 
+    Example :- id     name    location    startdate            enddate       is_current
                101    Jhon    Hyd         2023-01-01           2024-05-10       N
                101    Jhon    London      2024-05-11           NULL             Y
 
-    Implementaion: Delta Lake MERGE + insert new record + update old record's metadata.
+Implementaion: Delta Lake MERGE + insert new record + update old record's metadata.
+
+MERGE INTO target AS t
+USING source AS s
+ON t.id=s.id AND t.is_current='true'
+
+WHEN MATCHED AND t.location <> s.location THEN
+    UPDATE SET t.enddate = CURRENT_DATE(),
+               t.is_current = 'false'
+
+WHEN NOT MATCHED THEN
+    INSERT (id, name, location, startdate, enddate, is_current)
+    VALUES (s.id, s.name, s.location, CURRENT_DATE(), NULL, 'true')
+------------------------------------------------------------------------------------------------
 
     SCD Type 3 - Limited History
 
@@ -48,3 +64,4 @@ Delta Lake MERGE is commonly used to implement SCD
     Type 1 -> overwrite the matched row
     Type 2 -> Insert a new row version + mark old row as expired (is_current)
     Type 3 -> updating additional columns to capture old value
+'''
