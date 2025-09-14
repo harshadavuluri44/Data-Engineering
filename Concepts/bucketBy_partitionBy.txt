@@ -1,0 +1,24 @@
+* bucketBy is used when writing a DataFrame to storage.
+
+* It tells spark to organize data into fixed number of buckets based on a column (or set of columns)
+
+* Inside each bucket, rows with same values for that mentioned columns will always end up in same file
+
+Why use bucketBy?
+
+1. Faster Joins
+2. Faster aggregations
+
+Syntax
+
+df.write.bucketBy(8,'user_id').sortBy('user_id').format('parquet').saveAsTable('table_name')
+
+Here, spark write dataframe into 8 buckets/ files.
+------------------------------------------------------------------------------------------------
+
+Difference from partitionBy
+
+* partitionBy: creates new folder for each unique value in the partition column. Good if column has
+               low cardinality (unique values in column)
+
+* bucketBy : creates fixed number of files by hashing the column values

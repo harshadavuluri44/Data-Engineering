@@ -1,0 +1,57 @@
+Partitioning, Clustering and Z-ordering are important performance optimization techniques used in
+data warehousing systems (especially in columnar storage engines and Delta Lake).
+---------------------------------------------------------------------------------------------------
+
+Partitioning (also called Data Partitioning)
+
+Splitting a big table/file into smaller chunks based on a column's value
+
+* Each partition stores data for one value or range of a chosen column
+* Common partition columns: date, country, customer_id, etc.
+* Helps in pruning unnecessary data during query -> faster reads.
+
+Example: Partitioning a sales table by year:
+    /sales/partition_date=2023/
+    /sales/partition_date=2024/
+
+A query for WHERE partition_date=2023 reads only that folder - not all data.
+----------------------------------------------------------------------------------------------------
+
+Clustering (a.k.a Data Skipping/ Ordering withing partition)
+
+Organizing rows inside each partition so that similar values are grouped together
+
+* Does not create new partitions -> works within the existing partition
+* Helps improve query performance for range or filter conditions on clustering column
+
+Example : Partitioned by date and then clustered by customer_id
+Now inside each date-partition, rows for each customer are stored together -> faster scan for one
+customer on that date.
+
+Clustering is acheived by OPTIMIZE in delta lake for delta tables
+
+OPTIMIZE my_tablet5
+------------------------------------------------------------------------------------------------
+
+Z-Ordering (Delta Lake specific optimization)
+
+Smart multi-column clustering technique (using Z-order curves), to co-locate related information in
+same set of files.
+
+* Useful when queries filter on multiple columns (e.g region + user_id)
+* Applies space-filling curve algorithm to order withing partitions across multiple Dimensions
+* Improves data skipping in Delta Lake by minimizing number of files scanned
+
+Example usage in DBX:
+
+OPTIMIZE my_table ZORDER BY (customer_id, even_date)
+
+Faster queries with multi-column predicates (AND / ORD filters)
+------------------------------------------------------------------------------------------------
+
+Pruning / Data skipping / Coarse filtering
+
+means query engine avoid reading unnecessary data files and it is acheived based on 
+WHERE of FILTER conditions, and it works more effectively when the table is partitioned, clustered,
+or Z-Ordered.
+

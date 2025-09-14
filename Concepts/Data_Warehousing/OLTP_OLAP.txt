@@ -1,0 +1,32 @@
+OLTP = Online Transaction processing
+
+It refers to systems/applications that create and store operational/transactional data
+
+Data is created by insert, update, delete etc.
+
+In the context of DW, OLTP systems are sources of data, from which data is collected and loaded into
+warehouse.
+
+OLTP is not a part of DW. 
+
+OLTP systems (sources) -> ETL -> Data Warehouse (target)
+--------------------------------------------------------------------------------------
+
+OLAP = Online Analytical processing
+
+It refers to systems/ tools used for analyzing large volumes of historical data stored in DW, to 
+support business decisions.
+-------------------------------------------------------------------------------------------------
+
+In the DW ecosystem :
+
+OLTP applications -> ETL -> DW -> OLAP Tools (Reports/ Dashboards)
+-------------------------------------------------------------------------------------------------
+
+OLTP VS OLAP
+
+Feature                        OLTP                         OLAP
+Data Source                    Current Data                 Historical Data (DW)
+Queries                        Simple transformations       Complex aggregations
+DB Design                      Normalized Schema            Star/Snowflake Schema
+Use Case                       Operations (day-to-day)      Analysis (decision making)

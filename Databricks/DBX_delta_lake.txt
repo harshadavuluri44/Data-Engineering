@@ -1,0 +1,54 @@
+What is Delta Lake?
+
+Delta Lake is an open-source storage layer that:
+* Brings ACID transactions, schema enforcement, and time travel to data lakes
+* Works on top of Parquet files
+* Supports MERGE, UPDATE, DELETE, VACUUM, OPTIMIZE, etc.
+
+When we spin a 15.4 cluster, it:
+* Comes pre-installed with Delta Lake libraries (no need to install manually)
+* Supports Delta-specific Spark APIs:
+  i.   spark.read.format('delta')
+  ii.  df.write.format('delta')
+  iii. OPTIMIZE, VACUUM, DESCRIBE, HISTORY etc.
+
+we can directly use Delta Lake tables without extra setup.2
+
+-------------------------------------------------------------------------------------------------
+
+spark.read.format('delta') 
+    -  This is a Spark DataFrameReader API call used to read a Delta Lake table from a PATH or a
+       METASTORE TABLE into Data Frame
+
+Syntax
+df = spark.read.format('delta').load('path_to_delta_table')
+
+when we use format('delta'), Spark will:
+    * Expect the source data to be in Delta Format (not just raw parquet)
+    * Read the Delta transaction log(_delta_log/) and all underlying data files
+
+Examples 
+1. Read from a path based Delta table:
+
+df = spark.read.format('delta').load('delta_table_s3_storage_location_path')
+
+2. Read from a metastore Delta table:
+
+df = spark.read.table('table_name') # no need to specify format
+df = spark.read.format('delta').table('table_name')  # both are same
+
+---------------------------------------------------------------------------------------------------
+
+df = spark.read.format('parquet').load('delta_table_s3_storage_location_path')
+
+This reads all parquet files - It doesn't read the _delta_log/ refrenced parquet files only
+
+---------------------------------------------------------------------------------------------------
+
+BONUS POINT :-
+
+df = spark.read.format('delta').option('timestampAsOf', '2023-10-01').load(table_name)
+
+So it reads data available in table till the date of 2023-10-01
+
+---------------------------------------------------------------------------------------------------

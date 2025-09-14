@@ -1,0 +1,34 @@
+OutOfMemory (OOM) Error in pyspark
+
+An OOM Error occurs when spark tries to store data (for shuffles, caching, joins, aggregations,etc.) 
+that exceeds the allocated executor memory or driver memory
+
+When / Why it occurs
+
+1. Data Skew -> one partition much larger than others, overloading a single task's memory.
+2. Large Shuffles -> Wide transformations (groupBy, join, orderBy, distinct) generating huge 
+   intermediate data
+3. Too much caching -> persisting datasets without enough memory
+4. Collecting huge data to driver -> .collect() on large datasets
+5. Low memory configs -> executor/driver memory too small for workload
+6. Improper partitioning -> too few partitions -> larger per-partition size
+
+Resolve OOM
+
+1. Handle Skew
+    * Use Salting for skewed keys
+2. Increase parallelism
+    * Increase shuffle partitions:
+      spark.conf.set("spark.sql.shuffle.partitions", N)
+3. Increase memory allocation (if justified)
+    -- executor-memory and 
+    -- executor-memoryOverhead.
+
+    -- driver-memory
+4. Broadcast small datasets in join
+5. Avoid collecting large datasets
+    * Use .show() with limit instead of .collect()
+
+Key formula for safe processing
+
+Partitions Size <= Available Execution Memory per Task

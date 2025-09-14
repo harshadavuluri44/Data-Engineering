@@ -1,0 +1,235 @@
+IMPORTANT :- WE SHOULD NOT APPLY FUNCTIONS ON DATAFRAME,
+                        WHICH WE IMPORT FROM pyspark.sql.functions (col, rank, avg, etc.,)
+---------------------------------------------------------------------------------------------
+
+Load data from file into df
+
+df = spark.read.format('parquet').load(file_path)
+df = spark.read.csv(file_path, header=True, inferSchema=True)
+
+header = True -> df acknowledges first row as column names
+inferSchema = True -> df acknowledges the data types of column
+---------------------------------------------------------------------------------------------
+
+Load data from delta table into df
+
+df = spark.read.table('table_name')
+df = spark.read.format('delta').load(table_storage_location)
+
+table_storage_location :- s3 location which has delta log.
+---------------------------------------------------------------------------------------------
+
+Read only custom rows instead of all the available from parquet or delta table
+
+from pyspark.sql.types import StructType(), StructField(), IntegerType(), StringType()
+
+custom_schema = StructField(
+    [
+        StructType('col_1',IntegerType(), True),
+        StructType('col_3',StringType(), True)
+    ]
+)
+
+df = spark.read.format('parquet').schema(custom_schema).load(file_path)
+
+df = spark.read.schema(custom_schema).table(table_name)
+----------------------------------------------------------------------------------------------
+
+Write data from df to delta table or delta location
+
+df.write.format('delta').mode('overwrite').saveAsTable('table_name')
+df.write.format('delta').mode('overwrite').save(table_storage_location)
+df.write.format('parquet').mode('overwrite').save(file_path)
+
+do partition while writing
+
+df.write.format('delta').partitionBy('col_1').mode('overwrite').saveAsTable('table_name')
+df.write.format('delta').partitionBy('col_1').mode('overwrite').save('table_storage_path')
+
+partitioning helps sql queries faster
+---------------------------------------------------------------------------------------------
+
+df.show(n,truncate=False)
+
+n (default = 20) -> shows first n rows of dataframe in console
+truncate = False -> Prints full value eventhough value has more than 20 words
+---------------------------------------------------------------------------------------------
+
+df.printSchema() -> prints all col_names, data type, nullable=True/False in the console
+df.schema -> Returns StructType() with all the details as a python variable
+
+Use df.schema to detect schema mismatch between existing table and newly arrived data
+
+True -> Column in df can contain null values, vice versa
+------------------------------------------------------------------------------------------------
+
+df.count() -> returns number of rows in df
+------------------------------------------------------------------------------------------------
+
+df.select().show() -> gives a dataframe
+----------------------------------------------------------------------------------------------
+
+df.collect() -> returns a python LIST with each element as each row in df
+----------------------------------------------------------------------------------------------
+
+We can convert row in LIST formed by df.collect() into Dictionary by  row.asDict()
+[Dont apply .asDict() on List directly]
+----------------------------------------------------------------------------------------------
+
+df.columns -> returns a Python LIST with column names as elements
+----------------------------------------------------------------------------------------------
+
+df.filter(df['age']>40).show()
+df.filter(df['age']>40 & df['salary']>35000).show()
+
+In pyspark - Python's and , or not allowed - Instead use & , |
+----------------------------------------------------------------------------------------------
+
+df.withColumn('new_column_name', col('col_name')*0.75).show()
+
+df.withColumn('new_column_name, df['col_name']*0.75).show()
+
+.withColumn takes 2 arguments not keyword arguments
+----------------------------------------------------------------------------------------------
+
+df.groupBy('col_1').avg('col_2').show()
+
+use agg() to calculate more than 1 aggregation
+
+df.groupBy('col_1').agg(avg('col_2').alias('avg_salary'),
+                        sum('col_3').alias('sum_age')).show()
+-----------------------------------------------------------------------------------------------
+
+df.orderBy(col('col_1').desc()).show()
+---------------------------------------------------------------------------------------------
+
+Drop one or more columns
+
+df.drop('col_1')
+df.drop(['col_1','col_2'])
+----------------------------------------------------------------------------------------------
+
+df.withColumnRenamed('col_name','new_col_name').show()
+---------------------------------------------------------------------------------------------
+
+df.dropDuplicates() - Maintains one row among dropDuplicates
+
+df.dropDuplicates(['col_1','col_2'])
+---------------------------------------------------------------------------------------------
+
+df.fillna(0) -> fills NULL with 0 only in int columns
+df.fillna(Dictionary)
+df.fillna(value,subset=['col_1','col_2'])
+----------------------------------------------------------------------------------------------
+
+To find mean of one column
+
+df.select(avg('col_name').alias('col_name')).show() -> returns df with 1 column and 1 row
+
+To find mean of all columns
+
+col_list = df.columns
+
+df.select([avg(i).alias(i) for i in col_list]).show() -> returns df with all columns and 1 row
+-----------------------------------------------------------------------------------------------
+
+JOIN on single and multiple columns
+
+df_joined = df_1.join(df_2, on='col_1', how='inner')
+df_joined = df_1.join(df_2, on=['col_1','col_3'], how='inner')
+
+join using different columns
+
+df_joined = df_1.join(df_2, df_1.col_1=df_2.col_4, how='inner')
+-----------------------------------------------------------------------------------------------
+
+df_1.union(df_2).show()  -  Combines both df's with duplicate rows
+
+NOTE :- df_1 and df_2 should have same columns and data types
+----------------------------------------------------------------------------------------------
+
+rank() in python  -> creates a new column
+
+from pyspark.sql.functions import rank, col, desc
+from pyspark.sql.window import window
+
+window_spec = Window().partitionBy('col_1').orderBy(col('col_2').desc())
+
+df.withColumn('new_col', rank().over(window_spec)).show()
+----------------------------------------------------------------------------------------------
+
+partitionBy() is used for physcially organizing data in disk/ file/ file_path
+groupBy() is used for logically grouping data in dataframe
+----------------------------------------------------------------------------------------------
+
+WORKING OF JOINS
+
+Spark internally shuffles matching data from nodes to nodes based on col_name
+
+broadcast_join()  -> Instead of shuffling large dataframe across nodes (which is costlier), 
+spark send small df to all nodes and performs join
+
+df_large.join(broadcast(df_small) on='col_1', how='inner').show()
+----------------------------------------------------------------------------------------------
+
+explode() and explode_outer() -> returns each element in items_array as new row
+
+df.withColumn('items', explode(col('items_array'))).show()
+df.select('items_array', explode(col('items_array')).alias('items')).show()
+
+explode excludes null items_array
+explode_outer() includes null items_array
+
+IMP :- explode() takes only array or map columns but not struct columns {x,y,z}
+----------------------------------------------------------------------------------------------
+
+PIVOT :- The distinct values in pivot_column becomes columns
+
+df.groupBy('student').pivot('subject').agg(sum('score'))
+
+EXPLANATION :- .groupBy() converts multiple rows of one student into one row/ student
+               .pivot() converts all subjects into columns
+               .agg(sum('score')) [mandatory with pivot]
+-----------------------------------------------------------------------------------------------
+
+.repartition(), .coalesce() -> changes the plan of number of paritions in DAG, but no datamoment
+
+df.action() -> triggers shuffle and changes the paritions in memory
+
+.repartition() -> can increase or decrease number of partitions
+               -> Always causes full shuffle (Data is moved across executors)
+               -> Result in evenly size partitions
+               -> Expensive
+
+.coalesce() -> Only decreases the number of paritions
+            -> Doesn't shuffle the data
+            -> May result in uneven size partitions
+            -> Faster and cheaper than repartition
+
+Doing repartition smartly before join operations can reduce shuffle cost and execution time
+------------------------------------------------------------------------------------------------
+
+DATA SKEW 
+
+1. A partition has significantly more rows or data than others.
+
+2. A partition has many rows with the same key/partition value, leading to uneven distribution.
+
+Why it’s bad: Data skew is a performance killer. If one worker gets a large partition, it 
+takes much longer to process compared to other workers. Even if the other workers finish quickly,
+Spark must wait for the slowest (skewed) partition before sending results to the driver.
+
+Fix the SKEW 1. repartition
+             2. broadcast join
+             3. Salting technique
+------------------------------------------------------------------------------------------------------
+
+NARROW TRANSFORMATIONS :- Does not involve any shuffle (filter, withColumn, select)
+
+WIDE TRANSFORMATIONS :- Involve shuffle (groupBy, Join)
+----------------------------------------------------------------------------------------------------
+
+df.createOrReplaceTempView('temp_view')
+
+Will not create anything in the Unity Catalog or Hive metastore. This temporary view is stored in 
+spark's memory catalog for current session/cluster

@@ -1,0 +1,17 @@
+SCHEMA EVOLUTION :- If table contains 4 columns, but new data has arrived with 2 extra columns
+
+Load data into df first
+
+df = spark.read.parquet(file_path)
+
+1. df.write.format('delta').mode('append').option('mergeSchema','true').saveAsTable('table_name')
+2. df.write.format('delta').mode('overwrite').option('overwriteSchema','true').saveAsTable('table_name')
+3. df.schema -> Useful for comparing data types
+
+spark.conf.set("spark.databricks.delta.schema.autoMerge.enabled", "true")
+
+If the above is set at cluster level, then :
+* Delta lake will automatically merge schemas when you write to a table (append, merge, update, etc.)
+* We don't need to explicitly add .option('mergeSchema','true') in your write command
+
+NOTE :- But for .mode('overwrite') we still need .option('overwriteSchema','true')
