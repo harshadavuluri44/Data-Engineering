@@ -1,35 +1,50 @@
 '''
-OLTP = Online Transaction processing
+OLTP : A system or database designed to manage and process day-to-day transactional data in real
+time, supporting operations like insert, update, delete and read while ensuring data integrity
+and fast transaction processing.
 
-It refers to systems/applications that create and store operational/transactional data
+Ex: MySql database
 
-Data is created by insert, update, delete etc.
+OLAP : A system or tool designed to analyze large volumes of historical data warehouse, supporting
+complex queries, aggregations and multi-dimensional analysis to aid business decision-making.
 
-In the context of DW, OLTP systems are sources of data, from which data is collected and loaded into
-warehouse.
+Ex: AWS Redshift
 
-OLTP is not a part of DW. 
+--------------------------------------------------------------------------------------------
 
-OLTP systems (sources) -> ETL -> Data Warehouse (target)
---------------------------------------------------------------------------------------
+DIFFERENCES BETWEEN OLTP and OLAP SYSTEMS
 
-OLAP = Online Analytical processing
+Purpose
+    OLTP systems manage day-to-day transactional operations data
+    OLAP systems manage historical data and can analyze analyze for business decisions
 
-It refers to systems/ tools used for analyzing large volumes of historical data stored in DW, to 
-support business decisions.
--------------------------------------------------------------------------------------------------
+Data Type
+    OLTP contains current, operational data
+    OLAP contains historical, aggregate data
 
-In the DW ecosystem :
+Schema
+    Highly Normalized (to reduce redundancy)
+    De-normalized, often star or snowflake schema
 
-OLTP applications -> ETL -> DW -> OLAP Tools (Reports/ Dashboards)
--------------------------------------------------------------------------------------------------
+Query Type
+    Simple, short, fast
+    Complex, long-running, analytical queries
 
-OLTP VS OLAP
+Data Volume
+    OLAP > OLTP
 
-Feature                        OLTP                         OLAP
-Data Source                    Current Data                 Historical Data (DW)
-Queries                        Simple transformations       Complex aggregations
-DB Design                      Normalized Schema            Star/Snowflake Schema
-Use Case                       Operations (day-to-day)      Analysis (decision making)
+Perfromance
+    Fast incase of basic operations
+    Fast incase of big aggregations 
 
+Updates
+    Frequent
+    Batch updates
+
+Database Examples
+    MySQL, PostgreSQL, Oracle, SQL Server
+    AWS Redshift, Google BigQuery, Snowflake
+
+
+Data From OLTP systems -> ETL -> OLAP
 '''
