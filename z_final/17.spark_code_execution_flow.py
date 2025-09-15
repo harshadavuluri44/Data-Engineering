@@ -1,3 +1,4 @@
+'''
 1. Write code
 
    write a Spark application in Python/ Java/ Scala/ SQL using RDDs or DataFrame/ Datasets/ SparkSQL
@@ -54,3 +55,5 @@
     Spark cleans up resources or launches next stage of Job
 
     once all actions finish, your spark application ends
+
+'''

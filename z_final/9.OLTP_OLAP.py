@@ -1,3 +1,4 @@
+'''
 OLTP = Online Transaction processing
 
 It refers to systems/applications that create and store operational/transactional data
@@ -30,3 +31,5 @@ Data Source                    Current Data                 Historical Data (DW)
 Queries                        Simple transformations       Complex aggregations
 DB Design                      Normalized Schema            Star/Snowflake Schema
 Use Case                       Operations (day-to-day)      Analysis (decision making)
+
+'''

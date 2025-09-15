@@ -2,15 +2,6 @@
 
 How do you optimize pyspark code in production pipelines?
 
-
-4) Avoid UDF's :- Prefer spark's built-in functions for better optimization
-6) Monitor spark UI :- Identify slow stages, skewed tasks. 
-5) Column pruning & predicate pushdown :- Leverage .select(), .filter() early
-    Predicate pushdown :- apply filter() early in the code, instead of read all the unncessary data
-    column pruning :- select only required columns
-8) Use efficient file formats like parquet instead of CSV/JSON for better compression and columnar
-   storage
-
 ------------------------------------------------------------------------------------------------
    
 1) Use efficient file formats like parquet instead of csv/json for better compression and columnar
