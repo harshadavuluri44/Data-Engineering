@@ -65,4 +65,10 @@ grouped_rdd = [('a',[1,3,9]), ('b',6), ('c',7)]
 
 5. reduceByKey() :- 
 
+Diff between groupByKey() and reduceByKey()
+
+complete shuffle happens to brings same key values together in groupByKey()
+
+reduceByKey() aggregates first/ do local combine in each partition and then shuffle 
+
 '''
