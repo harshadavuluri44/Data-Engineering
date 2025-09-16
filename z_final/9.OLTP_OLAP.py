@@ -18,13 +18,17 @@ Purpose
     OLTP systems manage day-to-day transactional operations data
     OLAP systems manage historical data and can analyze analyze for business decisions
 
-Data Type
-    OLTP contains current, operational data
-    OLAP contains historical, aggregate data
-
 Schema
     Highly Normalized (to reduce redundancy)
     De-normalized, often star or snowflake schema
+
+Updates
+    Frequent
+    Batch updates through ETL
+
+Data Type
+    OLTP contains current, operational data
+    OLAP contains historical, aggregate data
 
 Query Type
     Simple, short, fast
@@ -36,10 +40,6 @@ Data Volume
 Perfromance
     Fast incase of basic operations
     Fast incase of big aggregations 
-
-Updates
-    Frequent
-    Batch updates
 
 Database Examples
     MySQL, PostgreSQL, Oracle, SQL Server
