@@ -1,13 +1,20 @@
-data = '{"employees":[{"name":"Alice","dept":"HR"},{"name":"Bob","dept":"IT"},{"name":"Charlie","dept":"Finance"}]}'
+a = [1, 3, 5, 7]
+b = [2, 4, 6, 8,10,17]
 
-import json
 
-parsed = json.loads(data)
+ans = []
 
-val = parsed['employees']
-result=[]
+x = len(a)
+y = len(b)
 
-for x in val:
-    result.append(x['name'])
+i=j=0
 
-print(result)
+while i<x and j<y:
+    while a[i]<b[j]:
+        ans.append(a[i])
+        i+=1
+    while b[j]<a[i]:
+        ans.append(b[j])
+        j+=1
+
+print(ans)

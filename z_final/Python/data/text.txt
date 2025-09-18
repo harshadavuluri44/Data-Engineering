@@ -1,0 +1,5 @@
+Data engineering is a growing field.
+Python is widely used in data engineering and data science.
+Engineers work with big data, pipelines, and cloud platforms.
+Python makes data processing easier for every data engineer.
+Data, data, and more data - that’s what data engineers love!
