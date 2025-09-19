@@ -1,3 +1,4 @@
+'''
 UDF = User Defined function
 
 * UDF is custom python function, we teach spark to run on each row of a DataFrame column
@@ -49,3 +50,4 @@ UDF is slower than Spark
 
 UDF's cannot be optimized like Spark built-in functions through catalyst optimizer during DAG 
 execution plan
+'''

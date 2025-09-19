@@ -1,3 +1,4 @@
+'''
 Fact Table
 
 * Stores numeric, measurable data about business events (facts)
@@ -21,7 +22,7 @@ Dimension Table
 
 Star Schema
 
-* A central fact table, with multipl dimension tables directly linked
+* A central fact table, with multiple dimension tables directly linked
 * Looks like a star shape after tables are connected
 * Dimension tables are denormalized -> more redundancy but fast querying
 -----------------------------------------------------------------------------------------------
@@ -29,7 +30,7 @@ Star Schema
 Snowflake Schema
 
 * An extension of Star Schema
-* Dimension tables are normalized into multiple related tables -> less redudancy, but more jons -> 
+* Dimension tables are normalized into multiple related tables -> less redudancy, but more joins -> 
   slightly slowly queries
 
 -------------------------------------------------------------------------------------------------
@@ -52,3 +53,4 @@ even if it causes repeated values
 
 Advantage -> faster querying (fewer joins)
 Disadvantage -> redundant data (more storage)
+'''

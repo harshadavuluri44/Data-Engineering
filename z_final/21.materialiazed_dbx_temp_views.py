@@ -1,3 +1,4 @@
+'''
 Materialized View (MV) :- A MV is like a pre-computed table that stores the actual physical data on
 disk.
 
@@ -56,3 +57,4 @@ Use MV when we need performance boost by avoding recomputation of heavy queries
 Use DBX views when you want reusable, maintainable SQL logic over base tables
 
 use temp_view when quickly querying a DF in your current notebook/ session
+'''
