@@ -3,7 +3,7 @@ How do you handle data integration from multiple sources?
 
 1. Identiy and connect to sources
     * Could be databases (MySQL, Postgres), APIs, files(CSV, JSON, Parquet), Streaming Systems(kafka)
-    * Read whol data using connectors in PySpark/ Databricks:
+    * Read whole data using connectors in PySpark/ Databricks:
         -> spark.read.format('jdbc') for database
         -> spark.read.format('json/parquet') for files
         -> Structured streaming for kafka/Event hubs

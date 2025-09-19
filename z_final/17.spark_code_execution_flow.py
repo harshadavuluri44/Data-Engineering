@@ -23,7 +23,7 @@
 
 5. DAG Creation
 
-   Spark converts the above physical plan into a DAG of stages and tasks.
+   Spark converts the above physical plan into a DAG of stages.
 
    Each stage is set of pipelined transformations
 

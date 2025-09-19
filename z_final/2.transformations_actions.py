@@ -1,7 +1,7 @@
 '''
 Transformations - Operations that create a new RDD/DataFrame from an existing one.
 
-i) Lazy - They don't execute immediately; Spark just builds a logical plan (DAG)
+i) Lazy - They don't execute immediately, instead Spark just builds a logical plan (DAG)
 ii) Actual execution happens only when an action is called.
 
 .filter, .withColumn, .groupBy, .join

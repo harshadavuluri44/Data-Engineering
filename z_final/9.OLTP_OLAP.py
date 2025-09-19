@@ -5,8 +5,9 @@ and fast transaction processing.
 
 Ex: MySql database
 
-OLAP : A system or tool designed to analyze large volumes of historical data warehouse, supporting
-complex queries, aggregations and multi-dimensional analysis to aid business decision-making.
+OLAP : A system or tool designed to store and analyze large volumes of historical data warehouse, 
+supporting complex queries, aggregations and multi-dimensional analysis to aid business 
+decision-making.
 
 Ex: AWS Redshift
 
@@ -26,10 +27,6 @@ Updates
     Frequent
     Batch updates through ETL
 
-Data Type
-    OLTP contains current, operational data
-    OLAP contains historical, aggregate data
-
 Query Type
     Simple, short, fast
     Complex, long-running, analytical queries
@@ -44,6 +41,10 @@ Perfromance
 Database Examples
     MySQL, PostgreSQL, Oracle, SQL Server
     AWS Redshift, Google BigQuery, Snowflake
+
+Data Type
+    OLTP contains current, operational data
+    OLAP contains historical, aggregate data
 
 
 Data From OLTP systems -> ETL -> OLAP
