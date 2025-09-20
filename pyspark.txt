@@ -192,23 +192,6 @@ EXPLANATION :- .groupBy() converts multiple rows of one student into one row/ st
                .agg(sum('score')) [mandatory with pivot]
 -----------------------------------------------------------------------------------------------
 
-.repartition(), .coalesce() -> changes the plan of number of paritions in DAG, but no datamoment
-
-df.action() -> triggers shuffle and changes the paritions in memory
-
-.repartition() -> can increase or decrease number of partitions
-               -> Always causes full shuffle (Data is moved across executors)
-               -> Result in evenly size partitions
-               -> Expensive
-
-.coalesce() -> Only decreases the number of paritions
-            -> Doesn't shuffle the data
-            -> May result in uneven size partitions
-            -> Faster and cheaper than repartition
-
-Doing repartition smartly before join operations can reduce shuffle cost and execution time
-------------------------------------------------------------------------------------------------
-
 DATA SKEW 
 
 1. A partition has significantly more rows or data than others.
