@@ -27,7 +27,7 @@ Organizing data within each partition based on the values of one or more columns
 grouping rows together inside parquet or delta files.
 
 
-* NOTE : It doesn't create new directories
+NOTES : It doesn't create new directories
 
 PURPOSE : Makes range or filter queries faster due to sorted and grouped data
 
