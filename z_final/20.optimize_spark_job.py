@@ -14,7 +14,7 @@ How do you optimize pyspark code in production pipelines?
 4) Minimize shuffle operations by using 
    broadcast joins for small tables (<200MB)
 
-5) Use dataframes over rdds, to get benifit from catalyst optimizer, better performance
+5) Use dataframes over rdds, to get benefit from catalyst optimizer, better performance
 
 6) Use built-in functions instead of UDF when possible
 

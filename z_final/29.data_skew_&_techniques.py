@@ -47,7 +47,7 @@ df_big.join(broadcast(df_small), 'key')
 
 
 
-4. Incease parallelism : Increase the number of shuffle partitions
+4. Increase parallelism : Increase the number of shuffle partitions
 
 spark.conf.set('spark.sql.shuffle.partitions', 1000)
 
