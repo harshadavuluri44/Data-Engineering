@@ -1,3 +1,4 @@
+'''
 Flow of DBX cluster (DBR 15.4, 4 worker nodes, i3.xlarge) Spin up -> pyspark notebook execution ->
 cluster termination
 
@@ -75,3 +76,5 @@ What is a JVM process?
 
 * Once the Spark Executor starts : It contacts the Driver to say : 
     " Hey, I'm ready! you can assign tasks to me."
+
+'''

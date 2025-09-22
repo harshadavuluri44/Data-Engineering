@@ -1,3 +1,5 @@
+'''
+
 What is Delta Lake?
 
 Delta Lake is an open-source storage layer that:
@@ -52,3 +54,5 @@ df = spark.read.format('delta').option('timestampAsOf', '2023-10-01').load(table
 So it reads data available in table till the date of 2023-10-01
 
 ---------------------------------------------------------------------------------------------------
+
+'''
