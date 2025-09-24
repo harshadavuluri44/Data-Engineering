@@ -5,7 +5,8 @@ WHAT IS A DATA LAKEHOUSE?
 A Data Lakehouse is a centralized data platform that combines the flexibility and scalability of a 
 data lake with the structured data management, reliability, and high-performance query capabilities 
 of a data warehouse. It allows organizations to store all types of data—structured, semi-structured,
-and unstructured.
+and unstructured. - while also supporting ACID transactions, schema enforcement, efficient query
+performance
 
 ------------------------------------------------------------------------------------------
 
