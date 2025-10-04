@@ -1,27 +1,32 @@
 '''
-What is Lazy Evaluation in Spark?
 
-* In Spark, transformations like (.filter, .select, etc) do not execute immediately.
+LAZY EVALUATION in SPARK
 
-* Instead, spark builds a logical plan (a DAG) describing the sequence of operations.
+In Spark, transformations (like .filter(), .select(), .map()) are not executed immediately.
+Instead, Spark builds a logical plan, called a DAG (Directed Acyclic Graph), that describes all 
+the transformations.
 
-* Actual execution happens only when an action (like .collect, .count, etc) is called.
+Transformations are only executed when an action is called, such as .collect(), .count(), etc.
 
------------
+-------------------------------------------------------------------------------------------------
 
-WHY IS LAZY EVALUATION IS USEFUL ?
+WHY Lazy Evaluation is Useful?
 
-1. Optimization (Catalyst optimizer in Spark SQL)
+1. Optimization (via Catalyst Optimizer)
 
-    Spark can look at entire chain operations and optimize execution (e.g, push filters down,
-    combine operations).
+    Spark can analyze the full chain of transformations before execution.
+    It can reorder, combine, or push down operations (like filters) to improve performance.
 
 2. Fault Tolerance
 
-    Spark can recompute missing data using DAG instead of storing intermediate results.
+    Spark can recompute lost data using the DAG instead of storing all intermediate results.
+    This allows efficient recovery from node failures.
 
 3. Efficiency
 
-   Unnecessary computations are skipped if their results aren't needed.
+    Computations that are not needed are skipped, reducing unnecessary work, This helps save time 
+    and resources.
+
+-------------------------------------------------------------------------------------------------
 
 '''

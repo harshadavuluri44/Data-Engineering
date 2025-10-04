@@ -1,17 +1,23 @@
 '''
-Transformations - Operations that create a new RDD/DataFrame from an existing one.
 
-i) Lazy - They don't execute immediately, instead Spark just builds a logical plan (DAG)
-ii) Actual execution happens only when an action is called.
 
-.filter, .withColumn, .groupBy, .join
+Transformations: Operations that create a new RDD/DataFrame from an existing one.
 
-Actions - Operations that trigger execution of DAG and return value to driver program or write
-data to storage
+    Lazy: They don't execute immediately; Spark builds a logical plan (DAG).
+    Execution: Happens only when an action is called.
 
-i) Eager - They cause spark to compute the result of transformations
+Examples: .filter(), .withColumn(), .groupBy(), .join()
 
-.show(), .count(), .collect()
-df.write.mode().saveAsTable()
+--------------------------------------------------------------------------------------------------
+
+Actions: Operations that trigger execution of the DAG and return results to the driver or write 
+data to storage.
+
+    Eager: They force Spark to compute the result of all preceding transformations.
+    Execution: Triggered immediately.
+
+    Examples: .show(), .count(), .collect(), df.write.mode().saveAsTable()
+
+----------------------------------------------------------------------------------------------------
 
 '''
