@@ -1,51 +1,41 @@
-'''
-OLTP : A system or database designed to manage and process day-to-day transactional data in real
-time, supporting operations like insert, update, delete and read while ensuring data integrity
-and fast transaction processing.
+"""
 
-Ex: MySql database
+OLTP (Online Transaction Processing):
 
-OLAP : A system or tool designed to store and analyze large volumes of historical data warehouse, 
-supporting complex queries, aggregations and multi-dimensional analysis to aid business 
-decision-making.
+    A system or database designed to manage and process day-to-day transactional data in real-time,
+    supporting operations like insert, update, delete, and read while ensuring data integrity and 
+    fast transaction processing.
 
-Ex: AWS Redshift
+Examples: MySQL, PostgreSQL, Oracle, SQL Server.
 
---------------------------------------------------------------------------------------------
+---------------------------------------------------------------------------------------------------
 
-DIFFERENCES BETWEEN OLTP and OLAP SYSTEMS
+OLAP (Online Analytical Processing):
 
-Purpose
-    OLTP systems manage day-to-day transactional operations data
-    OLAP systems manage historical data and can analyze analyze for business decisions
+    A system or tool designed to store and analyze large volumes of historical data, supporting 
+    complex queries, aggregations, and multi-dimensional analysis to aid business decision-making.
 
-Schema
-    Highly Normalized (to reduce redundancy)
-    De-normalized, often star or snowflake schema
+Examples: AWS Redshift, Google BigQuery, Snowflake.
 
-Updates
-    Frequent
-    Batch updates through ETL
+--------------------------------------------------------------------------------------------------
 
-Query Type
-    Simple, short, fast
-    Complex, long-running, analytical queries
+Key Differences:
 
-Data Volume
-    OLAP > OLTP
+Feature             | OLTP                                      | OLAP
+------------------- | ---------------------------------------- | -------------------------------------------
+Purpose             | Manage daily transactional data           | Analyze historical data for business decisions
+Schema              | Highly normalized (reduces redundancy)   | Denormalized, often star or snowflake schema
+Updates             | Frequent, real-time                       | Batch updates via ETL
+Query Type          | Simple, short, fast                       | Complex, long-running analytical queries
+Data Volume         | Smaller                                   | Very large
+Performance         | Optimized for fast inserts/updates        | Optimized for aggregations and analysis
+Data Type           | Current, operational data                 | Historical, aggregated data
+Database Examples   | MySQL, PostgreSQL, Oracle, SQL Server    | AWS Redshift, Google BigQuery, Snowflake
 
-Perfromance
-    Fast incase of basic operations
-    Fast incase of big aggregations 
+----------------------------------------------------------------------------------------------
 
-Database Examples
-    MySQL, PostgreSQL, Oracle, SQL Server
-    AWS Redshift, Google BigQuery, Snowflake
-
-Data Type
-    OLTP contains current, operational data
-    OLAP contains historical, aggregate data
+Data Flow:
+OLTP systems --> ETL process --> OLAP systems
 
 
-Data From OLTP systems -> ETL -> OLAP
-'''
+"""
