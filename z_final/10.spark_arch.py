@@ -1,22 +1,42 @@
-'''
-
+"""
 Apache Spark Architecture
 
-Apache Spark follows a master-slave architecture consisting of 3 main components - 
+Apache Spark follows a master-slave architecture consisting of three main components:
 Driver Program, Cluster Manager, and Executors.
 
-Driver Program : Runs on master node and is responsible for overall execution of spark application.
-It creates a SparkSession (which internally manages SparkContext) and converts the user code
-into a logical execution plan, optimizes it, and constructs a DAG of stages. Each stage is further 
-divided into tasks. The driver schedules tasks, tracks metadata, and collect results from executors.
+-----------------------------------------------------------------------------------------------
+1. Driver Program:
 
-Cluster Manager : Spark relies on a cluster manager like YARN, Mesos, kubernetes or Spark's built-in
-Standalone manager to allocate CPU and memory resources to workers across the cluster.
+    Runs on the master node and is responsible for the overall execution of the Spark application.
+    Creates a SparkSession (which internally manages SparkContext).
+    Converts user code into a logical execution plan, optimizes it, and constructs a DAG of stages.
+    Each stage is further divided into tasks.
+    The driver schedules tasks, tracks metadata, and collects results from executors.
 
-Executors : Executors are worker processes launched on cluster nodes. They perform the actual
-computation of tasks, cache data in memory/disk, and report results back to driver.
+-----------------------------------------------------------------------------------------------
+2. Cluster Manager:
 
-This architecture enables in-memory processing, distributed parallel execution, and fault tolerance 
-via RDD lineage, makeing Spark much faster than traditional systems like Hadoop MapReduce.
+    Allocates CPU and memory resources to worker nodes across the cluster.
+    Spark can use different cluster managers:
+        YARN
+        Mesos
+        Kubernetes
+        Spark's built-in standalone manager
 
-'''
+-----------------------------------------------------------------------------------------------
+3. Executors:
+
+    Worker processes launched on cluster nodes.
+    Perform the actual computation of tasks.
+    Cache data in memory/disk when needed.
+    Report task results back to the driver.
+
+-----------------------------------------------------------------------------------------------
+Key Benefits of Spark Architecture:
+
+    In-memory processing for faster computation.
+    Distributed and parallel execution across nodes.
+    Fault tolerance via RDD lineage.
+    Much faster than traditional systems like Hadoop MapReduce.
+
+"""
