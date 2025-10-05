@@ -21,16 +21,16 @@ Examples: AWS Redshift, Google BigQuery, Snowflake.
 
 Key Differences:
 
-Feature             | OLTP                                      | OLAP
-------------------- | ---------------------------------------- | -------------------------------------------
-Purpose             | Manage daily transactional data           | Analyze historical data for business decisions
-Schema              | Highly normalized (reduces redundancy)   | Denormalized, often star or snowflake schema
-Updates             | Frequent, real-time                       | Batch updates via ETL
-Query Type          | Simple, short, fast                       | Complex, long-running analytical queries
-Data Volume         | Smaller                                   | Very large
-Performance         | Optimized for fast inserts/updates        | Optimized for aggregations and analysis
-Data Type           | Current, operational data                 | Historical, aggregated data
-Database Examples   | MySQL, PostgreSQL, Oracle, SQL Server    | AWS Redshift, Google BigQuery, Snowflake
+Feature           | OLTP                                   | OLAP
+----------------  | -------------------------------------  | -------------------------------------------
+Purpose           | Manage daily transactional data        | Analyze historical data for business decisions
+Schema            | Highly normalized (reduces redundancy) | Denormalized, often star or snowflake schema
+Updates           | Frequent, real-time                    | Batch updates via ETL
+Query Type        | Simple, short, fast                    | Complex, long-running analytical queries
+Data Volume       | Smaller                                | Very large
+Performance       | Optimized for fast inserts/updates     | Optimized for aggregations and analysis
+Data Type         | Current, operational data              | Historical, aggregated data
+Database Examples | MySQL, PostgreSQL, Oracle, SQL Server  | AWS Redshift, Google BigQuery, Snowflake
 
 ----------------------------------------------------------------------------------------------
 

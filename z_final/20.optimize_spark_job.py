@@ -1,26 +1,41 @@
-'''
+"""
+How do you optimize PySpark code in production pipelines?
 
-How do you optimize pyspark code in production pipelines?
+--------------------------------------------------------------------------------------------
 
-------------------------------------------------------------------------------------------------
+1) Use efficient file formats:
+      Prefer Parquet or ORC over CSV/JSON for better compression and columnar storage.
    
-1) Use efficient file formats like parquet instead of csv/json for better compression and columnar
-   storage (ex: while writing)
+   Example: while writing data, always choose parquet unless there is a specific reason.
 
-2) Use caching and persistence to access or reuse dataframe further in code
-3) Use df.rdd.getNumPartitions() to check number of partitions
-   repartition or coalsece to wisely balance load across cluster nodes
+2) Cache/Persist wisely:
+      Use df.cache() or df.persist() only when the same DataFrame is reused multiple times.
+      Avoid unnecessary caching to save cluster memory.
 
-4) Minimize shuffle operations by using 
-   broadcast joins for small tables (<200MB)
+3) Optimize partitions:
+      Check number of partitions using df.rdd.getNumPartitions().
+      Use repartition() for full shuffle (expensive but balances data evenly).
+      Use coalesce() to reduce partitions without shuffle.
 
-5) Use dataframes over rdds, to get benefit from catalyst optimizer, better performance
+4) Minimize shuffle operations:
+      Prefer broadcast joins for small tables (<200 MB) using broadcast().
+   Example: from pyspark.sql.functions import broadcast.
 
-6) Use built-in functions instead of UDF when possible
+5) Use DataFrames/Datasets over RDDs:
+      DataFrames benefit from Catalyst Optimizer and Tungsten execution engine.
+      Provides better performance and less boilerplate code.
 
-7) Predicate Pushdown and Column pruning
+6) Use built-in Spark SQL functions instead of UDFs:
+      Spark SQL functions are optimized and benefit from Catalyst.
+      UDFs are black boxes and slower unless absolutely required.
 
-8) Monitor and Tuning
-   Find slow jobs and skewed tasks
+7) Enable Predicate Pushdown and Column Pruning:
+      Read only required columns: df.select("col1", "col2").
+      Filter early in the pipeline to minimize scanned data.
 
-'''
+8) Monitor and Tune jobs:
+      Use Spark UI to identify slow stages, skewed partitions, and long shuffles.
+      Optimize skewed joins (salting technique or skew join hints).
+
+--------------------------------------------------------------------------------------------
+"""
