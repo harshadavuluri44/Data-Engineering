@@ -1,59 +1,59 @@
-'''
-1. Write code
+"""
+Apache Spark Code Execution Flow
 
-   write a Spark application in Python/ Java/ Scala/ SQL using RDDs or DataFrame/ Datasets/ SparkSQL
+Step-by-step flow of how a Spark application executes:
 
-2. Spark Context/Session Creation
+-----------------------------------------------------------------------------------------------
+1. Write Code:
+      Write a Spark application in Python, Java, Scala, or SQL using RDDs, DataFrames/Datasets, or
+      SparkSQL.
 
-   When above program starts, it creates a SparkSession (which internally holds a SparkContext) - this
-   acts as the entry-point and negotiates resources with cluster manager.
+-----------------------------------------------------------------------------------------------
+2. SparkContext / SparkSession Creation:
+      When the program starts, it creates a SparkSession (which internally holds a SparkContext).
+      Acts as the entry point to Spark, enables features like the Catalyst Optimizer through 
+      DataFrame/SQL APIs, and negotiates resources with the Cluster Manager.
 
-3. Build Logical Plan
+-----------------------------------------------------------------------------------------------
+3. Build Logical Plan:
+      Transformations (like .select(), .filter(), .join()) are lazy and not executed immediately.
+      Spark builds a logical plan (a blueprint of operations to be performed on the data).
 
-   As above application apply transformations (like .select(), .filter(), .join()), Spark does run
-   them immediately
+-----------------------------------------------------------------------------------------------
+4. Catalyst Optimizer (for DataFrame / SQL / Dataset APIs):
+      Logical plan passes through the Catalyst optimizer.
+      Catalyst resolves references, applies optimization rules, and selects the optimal physical 
+      plan.
 
-   It builds a logical plan (a blueprint of operations to be done on the data)
+-----------------------------------------------------------------------------------------------
+5. DAG Creation:
+      Spark converts the physical plan into a DAG (Directed Acyclic Graph) of stages.
+      Each stage contains a set of pipelined transformations.
 
-4. Catalyst optimizer (only for DataFrame/ SQL/ Dataset APIs)
+-----------------------------------------------------------------------------------------------
+6. Job Launch (on Action):
+      Nothing executes until an action is called (.collect(), .count(), .write(), etc.).
+      Spark submits the DAG to the DAG scheduler.
 
-   Spark sends the logical plan through catalyst optimizer
+-----------------------------------------------------------------------------------------------
+7. DAG Scheduler:
+      Splits the DAG into stages.
+      Each stage is divided into tasks based on data partitions.
+      Tasks are sent to the Task Scheduler for assignment to executors.
 
-   Catalyst resolves it, applies optimization rules, and chooses the optimal physical plan
+-----------------------------------------------------------------------------------------------
+8. Execution on Executors:
+      Executors (worker JVMs) execute the tasks.
+      Read partitions from storage, perform transformations, spill to disk if needed, shuffle data
+      between nodes, etc.
 
-5. DAG Creation
+-----------------------------------------------------------------------------------------------
+9. Result Back to Driver:
+      Results of tasks are sent back to the driver program.
 
-   Spark converts the above physical plan into a DAG of stages.
+-----------------------------------------------------------------------------------------------
+10. Task / Job Completion:
+      Spark cleans up resources or launches the next stage of the job.
+      Once all actions finish, the Spark application ends.
 
-   Each stage is set of pipelined transformations
-
-6. Job Launch (on Action)
-
-   Nothing is executed until an action is called (.collect(), .count(), .write())
-
-   Spark then submits DAG to the DAG scheduler.
-
-7. DAG scheduler
-
-   DAG scheduler splits the DAG into stages and then into multiple tasks based on data partitions
-
-   Tasks are sent to the Task Scheduler, which assigns them to executors.
-
-8. Execution on exectors
-
-   Executors (worker JVMs) run the tasks.
-
-   They read partitions from storage, perform transformations, spill to disk if needed, shuffle data
-   between nodes, etc.
-
-9. Result back to driver
-
-   Results of tasks are send back to driver program
-
-10. Task/ Job completion
-
-    Spark cleans up resources or launches next stage of Job
-
-    once all actions finish, your spark application ends
-
-'''
+"""

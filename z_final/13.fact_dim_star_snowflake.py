@@ -1,56 +1,60 @@
-'''
+"""
 Fact Table
 
-* Stores numeric, measurable data about business events (facts)
-* Facts are typically aggregates (sum, avg, count) etc.
-* Each fact record is linked to dimension tables via foreign keys
+Stores numeric, measurable data about business events (facts)
+Facts are typically aggregates like sum, avg, count, etc.
+Each fact record is linked to dimension tables via foreign keys
 
 Common fact table columns:
+    Date_Key      Foreign key to Date dimension table
+    Product_Key   Foreign key to Product dimension table
+    Store_Key     Foreign key to Store dimension table
+    Units_Sold    Fact measure
+    Revenue       Fact measure
 
-Date_Key        FK to Date dimension table
-Product_Key     FK to Product dimesion table
-Store_key       FK to store dimension
-Units_sold      Fact measure
-Revenue         Fact measure
---------------------------------------------------------------------------------------------------
-
+-----------------------------------------------------------------------------------------------
 Dimension Table
 
-* Stores descriptive, textual information about business entities
-* Helps to answer questions like who, what, when, where, how
---------------------------------------------------------------------------------------------------
+Stores descriptive, textual information about business entities
+Helps to answer questions like who, what, when, where, how
+
+------------------------------------------------------------------------------------------------
 
 Star Schema
 
-* A central fact table, with multiple dimension tables directly linked
-* Looks like a star shape after tables are connected
-* Dimension tables are denormalized -> more redundancy but fast querying
------------------------------------------------------------------------------------------------
-
-Snowflake Schema
-
-* An extension of Star Schema
-* Dimension tables are normalized into multiple related tables -> less redudancy, but more joins -> 
-  slightly slowly queries
+A central fact table with multiple dimension tables directly linked
+Looks like a star shape after tables are connected
+Dimension tables are denormalized, which increases redundancy but enables fast querying
 
 -------------------------------------------------------------------------------------------------
 
-What is Normalization?
+Snowflake Schema
 
-It is the process of designing database tables in a such a way that:
-    * Tables are broken into smaller related tables
-    * Redundancy (repeated data) is minimized
-    * Data is connected through foreign keys
+An extension of Star Schema
+Dimension tables are normalized into multiple related tables
+Reduces redundancy but requires more joins, which may slow down queries
 
-Advantage    -> saves storage, avoids duplication
-Disadvantage -> more joins needed during queries
------------------------------------------------------------------------------------------------
+-------------------------------------------------------------------------------------------------
 
-What is Denormalization?
+Normalization
 
-It is process of designing database tables by combining related data into one single wide table,
-even if it causes repeated values
+The process of designing database tables to:
+    Break tables into smaller related tables
+    Minimize redundancy (repeated data)
+    Connect data through foreign keys
 
-Advantage -> faster querying (fewer joins)
-Disadvantage -> redundant data (more storage)
-'''
+Advantages: saves storage, avoids duplication
+Disadvantages: requires more joins during queries
+
+---------------------------------------------------------------------------------------------------
+
+Denormalization
+
+The process of designing database tables by combining related data into one wide table
+This may cause repeated values but simplifies queries
+
+Advantages: faster querying (fewer joins)
+Disadvantages: redundant data (more storage)
+
+
+"""
