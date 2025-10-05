@@ -1,53 +1,60 @@
-'''
-UDF = User Defined function
+"""
+UDF = User Defined Function in PySpark
 
-* UDF is custom python function, we teach spark to run on each row of a DataFrame column
+    A UDF is a custom Python function that we teach Spark to run on each row of a DataFrame column.
 
-If I need to do a transformation on dataframe but spark don't have built-in function, then create a 
-udf and apply on the DataFrame
+When to use UDF?
+    If we need a transformation on a DataFrame that Spark does not provide as a built-in function,
+    we can create a UDF and apply it.
 
-HOW TO CREATE A UDF?
+Example: ML-related custom transformations.
 
-1. Write a normal python function
-2. Register it as a Spark UDF
-3. Apply it on a column
+NOTE:
+    UDFs can be slower than Spark built-in functions because they run Python code row by row 
+    and break Spark's Catalyst optimizer.
+    
+    Always prefer Spark built-in functions whenever possible.
 
-NOTE :- UDFs can be slower than built-in Spark functions because they break Spark's optimization 
-(they run python code for each row). Prefer Spark's built-in functions whenever possible.
+-------------------------------------------------------------------------------------------------
+Example: Convert a number to its English words
 
-* Use UDF during some ML-related transformation not available natively in Spark
+Spark doesn't have a built-in function to turn 123 into "one hundred twenty-three".
+We can do this with a UDF.
+
 -------------------------------------------------------------------------------------------------
 
-Example :- Convert a number to its English words
-
-Spark doesn't have a function to turn 123 into "one hundred twenty-three".
-
-We can do this with a UDF
+"""
 
 from pyspark.sql import SparkSession
 from pyspark.sql.functions import udf
 from pyspark.sql.types import StringType
-import inflect  # external python library for number to words
+import inflect  # external Python library for number-to-words
 
-spark = SparkSession.builder.appName('udf_example').getOrCreate()
+# Create Spark session
+spark = SparkSession.builder.appName("udf_example").getOrCreate()
 
+# Initialize inflect engine
 p = inflect.engine()
 
-def num_to_words(x):
+# Step 1: Write a normal Python function
+def num_to_words(num):
     if num is None:
-        return None:
-    return p.number_to_words(x)
+        return None
+    return p.number_to_words(num)
 
-# Register as UDF
+# Step 2: Register it as a Spark UDF
 num_to_words_udf = udf(num_to_words, StringType())
 
-# Apply UDF
+# Example DataFrame
+data = [(123,), (45,), (None,), (1001,)]
+df = spark.createDataFrame(data, ["num"])
 
-df.withColumn('num_in_words', num_to_words_udf('num')).show(truncate=False)
------------------------------------------------------------------------------------------------------
+# Step 3: Apply UDF on a column
+df.withColumn("num_in_words", num_to_words_udf("num")).show(truncate=False)
 
-UDF is slower than Spark
 
-UDF's cannot be optimized like Spark built-in functions through catalyst optimizer during DAG 
-execution plan
-'''
+"""
+Summary:
+    UDF is powerful for custom logic not available in Spark.
+    But UDFs are slower because they cannot be optimized by Spark's Catalyst optimizer.
+"""

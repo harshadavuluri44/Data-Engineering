@@ -1,32 +1,35 @@
-'''
-1. Detect missing/ null values
+""" Spark DataFrame - Handling Missing / Null Values """
 
-df.filter(df['col_name'].isNull()).show()
+df = []
 
-df.filter(df['col_name'].isNotNull()).show()
---------------------------------------------------------------------------------------------
+# 1. Detect missing / null values
 
-2. Drop missing values 
+df.filter(df['col_name'].isNull()).show()       # rows where col_name is null
+df.filter(df['col_name'].isNotNull()).show()    # rows where col_name is not null
 
-df.dropna().show()  -> Returns df after dropping rows with atleast one null in row
+# --------------------------------------------------------------------------------------------
 
-df.dropna(subset=['col1','col2']).show() -> df after dropping rows with both col1 & col2 are null
---------------------------------------------------------------------------------------------------
+# 2. Drop missing values
 
-3. Fill missing values
+df.dropna().show()                              # drop rows with at least one null
+df.dropna(subset=['col1', 'col2']).show()       # drop rows where col1 or col2 is null
 
-df.fillna(0).show()
+# --------------------------------------------------------------------------------------------
 
-df.fillna({'col1': 0, 'col2': "NONE"}).show()
------------------------------------------------------------------------------------------------
+# 3. Fill missing values
 
-4. REPLACE
+df.fillna(0).show()                             # replace all numeric nulls with 0
+df.fillna({'col1': 0, 'col2': "NONE"}).show()   # replace nulls with col-specific values
 
-SYNTAX :- df.replace(to_replace, value=None, subset=None)
+# --------------------------------------------------------------------------------------------
 
-to_replace -> the values we want to replace, it can be single value or list of values
-value -> the value to be used as replacement
-subset -> if None replace everywhere in all columns of dataframe, else provide specific cols
+# 4. Replace specific values (not just nulls)
 
-df.replace(['NA', 'null', ''], NONE).show()
-'''
+# Syntax: df.replace(to_replace, value=None, subset=None)
+#   to_replace -> value(s) to replace (single value, list, or dict)
+#   value      -> replacement value(s)
+#   subset     -> columns to apply replacement on (if None, applies to all columns)
+
+df.replace(['NA', 'null', ''], 'NONE').show()
+
+# --------------------------------------------------------------------------------------------
