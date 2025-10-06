@@ -112,11 +112,6 @@ df.drop(['col_1','col_2'])
 df.withColumnRenamed('col_name','new_col_name').show()
 ---------------------------------------------------------------------------------------------
 
-df.dropDuplicates() - Maintains one row among dropDuplicates
-
-df.dropDuplicates(['col_1','col_2'])
----------------------------------------------------------------------------------------------
-
 df.fillna(0) -> fills NULL with 0 only in int columns
 df.fillna(Dictionary)
 df.fillna(value,subset=['col_1','col_2'])

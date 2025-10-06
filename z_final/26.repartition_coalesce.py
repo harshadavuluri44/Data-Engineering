@@ -1,23 +1,25 @@
 '''
+Both repartition() and coalesce() are transformations used to change the number of partitions in
+Spark.
 
-Both repartition() and coalesce() are transformations used to change the number of partitions in 
-spark.
+--------------------------------------------------------------------------------
+DIFFERENCES:
 
+1. repartition():
+        Can increase or decrease the number of partitions.
+        Always triggers a full shuffle of data to evenly redistribute it across partitions.
+        Ensures partitions are balanced/even in size.
+        More expensive in terms of computation.
 
-DIFFERENCES :
-
-    -   Can increase or decrease the number of partitions.
+2. coalesce():
         Can only decrease the number of partitions.
+        Avoids a full shuffle by merging existing partitions together.
+        May cause uneven/skewed partitions.
+        Faster and cheaper than repartition().
 
-        Always triggers a full shuffle of data to evenly redistribute it across partitions
-        Avoids a full shuffle by merging existing partitions together
+--------------------------------------------------------------------------------
+TIP:
 
-        Ensures partitions are balanced/ even in size.
-        Causes uneven (skewed) partitions
+- Doing repartition smartly before join operations can reduce shuffle cost and execution time.
 
-        More expensive
-        Faster & Cheaper than repartition
-
-Doing repartition smartly before join operations 
-            can reduce shuffle cost and execution time.
 '''
