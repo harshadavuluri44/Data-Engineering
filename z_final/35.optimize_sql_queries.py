@@ -18,7 +18,7 @@
 
     Join order matters : start with smaller tables or highly filtered data
     
-    Use appropriate join types : For example, avoid CROSS JOIN unlessnecessary
+    Use appropriate join types : For example, avoid CROSS JOIN unless necessary
 
     Consider EXISTS instead of IN : EXISTS can be faster on large datasets
 
