@@ -54,6 +54,9 @@ def func(iterator):
 
 mapped_rdd = rdd.mapPartitions(func)
 
+mapPartitions can return multiple elements not like map
+mapPartitions return flattened output for each record
+
 ----------------------------------------------------------------------------------------------
 
 4. groupByKey() - Transformation
