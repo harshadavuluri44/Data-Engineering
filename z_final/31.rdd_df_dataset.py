@@ -14,4 +14,11 @@ DIFFERENCES between RDD and DataFrame
 
 4. Fault tolerance, they can easily recompute the lost partitions with the help of lineage
    Dataframes depends on rdd under the hood to acheive this behiavour
+
+---------------------------------------------------------------------------------------------------
+
+dataframes are immutable
+
+Any transformation does not modify the original dataframe, instead it creates a new DataFrame with
+applied changes
 '''

@@ -58,4 +58,12 @@ Increase driver memory if needed:
 
 -----------------------------------------------------------------------------------------------
 
+
+OOM occurs when
+
+1. large data collections
+2. data skew
+3. wide transformations with excessive data shuffle
+4. caching/ persisting large data
+
 """

@@ -30,4 +30,19 @@ DIFFERENCES
 from pyspark.sql import sparkSession
 
 spark = sparkSession.builder.appName('test').getOrCreate()
+
+---------------------------------------------------------------------------------------------
+
+Started career with Spark 3.3.0 (11.3 LTS DBR)
+
+Moved to Spark 3.5.0 (15.4 LTS DBR)
+
+Major change I observed from 3.3 to 3.5 is AQE feature in terms of performance
+
+1. AQE automatically adjusts shuffle partitions, apply join strategies, handles skews more efficiently
+   at runtime.
+
+2. Spark 3.5.0 which comes up with python version of 3.11 made UDF's execution bit faster
+
+
 '''
