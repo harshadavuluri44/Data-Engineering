@@ -1,11 +1,9 @@
 -- The AS keyword creates a temporary column alias for a column
--- The LIMIT clause is always placed at the end of an SQL query
--- Not equal to :- != or <>
+
+-- NOT EQUAL TO :- != or <>
+
 SELECT *, Name as CountryNAME FROM world.Country LIMIT 10;
 
-
--- Arithmetic operations
-SELECT *, quantity*price as total_amount FROM orders;
 
 SELECT * FROM table WHERE name LIKE 'Jhon%';
 SELECT * FROM table WHERE name LIKE '%aa%';
@@ -24,9 +22,6 @@ SELECT * FROM table WHERE name IS NOT NULL;
 SELECT * FROM table WHERE name='fata' AND age='44';
 SELECT * FROM table WHERE name='fata' OR age='44'
 
-
--- order of execution :- FROM -> WHERE -> SELECT -> ORDER BY
-SELECT * FROM table WHERE age > 20 ORDER BY amount, user_id;
 
 -- SUM,COUNT,AVG,MIN and MAX works on specific column
 
@@ -121,17 +116,6 @@ but dont use WITH twice ....
 SELECT * FROM table WHERE col_a=col_b=col_c (WRONG)
 
 SELECT * FROM table WHERE col_a=col_b AND col_b=col_c
------------------------------------------------------------------------------------------------
-
-DATE_FORMAT = 2023-08-19
-
-IN SQL YEAR(DATE_FORMAT) returns only year, i.e 2023
-       MONTH(DATE FORMAT) returns only month i.e 08
-
-Write a SQL query to find customers who placed orders in every month of the year 2024
-
-SELECT customer_id FROM orders WHERE YEAR(order_date)=2024 
-GROUP BY customer_id HAVING COUNT(DISTINCT MONTH(order_date))=12
 
 ------------------------------------------------------------------------------------------------
 
