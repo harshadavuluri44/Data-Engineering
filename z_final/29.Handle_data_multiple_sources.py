@@ -1,5 +1,5 @@
 """
-How do you handle data integration from multiple sources?
+Design an ETL pipeline for multiple data sources with different formats?
 
 ----------------------------------------------------------------------------------------------
 
