@@ -1,13 +1,11 @@
 '''
 
-AQE = Adaptive Query Execution
-
-Introduced in Spark 3.0
+AQE = Adaptive Query Execution  (Introduced in Spark 3.0)
 
 It means Spark can optimize the query plan at runtime, after it has already started executing
 
 Normally, Spark makes an execution plan before running (logical -> physical plan). But it cannot
-predict actual data size until it runs and cant changes the plan based on data size and partitions
+predict actual data size until it runs and can't changes the plan based on data size and partitions
 
 -> AQE solves this by adapting the plan dynamically using real-time statistics.
 

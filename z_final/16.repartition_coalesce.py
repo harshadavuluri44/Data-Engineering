@@ -20,6 +20,6 @@ DIFFERENCES:
 --------------------------------------------------------------------------------
 TIP:
 
-- Doing repartition smartly before join operations can reduce shuffle cost and execution time.
+    Doing repartition smartly before join operations can reduce shuffle cost and execution time.
 
 '''

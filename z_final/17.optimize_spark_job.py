@@ -4,7 +4,7 @@ How do you optimize PySpark code in production pipelines?
 --------------------------------------------------------------------------------------------
 
 1) Use efficient file formats:
-      Prefer Parquet or ORC over CSV/JSON for better compression and columnar storage.
+      Prefer Parquet/ORC over CSV/JSON for better compression and columnar storage.
    
    Example: while writing data, always choose parquet unless there is a specific reason.
 
@@ -19,7 +19,7 @@ How do you optimize PySpark code in production pipelines?
 
 4) Minimize shuffle operations:
       Prefer broadcast joins for small tables (<200 MB) using broadcast().
-   Example: from pyspark.sql.functions import broadcast.
+   Example: from pyspark.sql.functions import broadcast
 
 5) Use DataFrames/Datasets over RDDs:
       DataFrames benefit from Catalyst Optimizer and Tungsten execution engine.

@@ -51,7 +51,7 @@ Increase driver memory if needed:
 -----------------------------------------------------------------------------------------------
 4. Optimize Data & Code
 
-   Use columnar formats like Parquet or ORC instead of CSV/JSON (better compression + faster reads).  
+   Use columnar formats like Parquet/ORC instead of CSV/JSON (better compression + faster reads).  
    Prefer DataFrame / Dataset API over RDDs (Catalyst optimizer can optimize queries).  
    Cache / persist only when necessary. Use `MEMORY_AND_DISK` storage level:
       Disk here refers to the machine's hard drive or SSD.

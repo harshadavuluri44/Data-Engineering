@@ -10,12 +10,10 @@ of how many rows exist for that key).
 -----------------------------------------------------------------------------------------------
 When does Shuffle occur?
 Shuffle happens during wide transformations where data needs to be grouped, aggregated, or joined 
-based on a key. Examples:
-    - groupBy
-    - reduceByKey / groupByKey
-    - joins
-    - distinct
-    - repartition
+based on a key.
+
+Examples: .groupBy(), .reduceByKey() / .groupByKey(), .join()
+          .distinct(), .repartition()
 
 -----------------------------------------------------------------------------------------------
 Why are Shuffles expensive?
@@ -33,6 +31,7 @@ Optimization strategies to reduce shuffle cost:
     Apply bucketing on both tables using the same column before joining
 
 -----------------------------------------------------------------------------------------------
+
 Summary:
     Shuffle = Data movement across partitions/nodes.
     It's expensive and should be minimized through partitioning, bucketing, and using efficient 

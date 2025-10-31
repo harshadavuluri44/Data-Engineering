@@ -22,8 +22,7 @@ If 90% of rows have country = 'US' and other countries make up rest, then:
     Partition holding US data will be huge
     That executor will take much longer time to finish spark job
 
-
-
+------------------------------------------------------------------------------------------------
 HANDLING DATA SKEW
 
 1. Salting the keys : Add random prefix or suffix to skewed keys to artificially spread them across
