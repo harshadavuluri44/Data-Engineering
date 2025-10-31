@@ -2,7 +2,10 @@
 
 DATA GOVERNANCE & SECURITY is major thing in DATA MANAGEMENT
 
+Data Governance refers to the overall management of the availability, usability, integrity, and
+security of data used in an organization.
 
+-----------------------------------------------------------------------------------------------
 
 ACCESS CONTROL & AUTHENTICATION
 

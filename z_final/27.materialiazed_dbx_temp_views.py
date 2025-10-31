@@ -38,6 +38,7 @@ Example:
 Spark Temporary View:
 
   Created using df.createOrReplaceTempView('temp_view_name').
+
   In-memory view valid only within the current Spark session/notebook.
   Stored in Spark Session Catalog (not in Hive or Unity Catalog).
   Once the cluster is restarted or session ends, it disappears.

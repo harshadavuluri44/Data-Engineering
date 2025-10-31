@@ -24,9 +24,9 @@
 
 4. Optimize Aggregations
 
-Use indexed columns for GROUP BY and ORDER BY.
+    Use indexed columns for GROUP BY and ORDER BY.
 
-Pre-aggregate if possible: Use summary tables for frequent heavy aggregation.
+    Pre-aggregate if possible: Use summary tables for frequent heavy aggregation.
 
 5. Reduce Subqueries
 

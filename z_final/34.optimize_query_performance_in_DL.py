@@ -2,6 +2,8 @@
 
 How would you optimize query performance in a Data Lake?
 
+---------------------------------------------------------------------------------------------
+
 Use columnar file formats
 
     Store data in Parquet, ORC or Avro to reduce I/O by reading only required columns.
