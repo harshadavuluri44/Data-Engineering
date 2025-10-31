@@ -21,37 +21,36 @@ Example: Convert a number to its English words
 Spark doesn't have a built-in function to turn 123 into "one hundred twenty-three".
 We can do this with a UDF.
 
--------------------------------------------------------------------------------------------------
-
 """
 
 from pyspark.sql import SparkSession
 from pyspark.sql.functions import udf
-from pyspark.sql.types import StringType
-import inflect  # external Python library for number-to-words
+import inflect
 
-# Create Spark session
 spark = SparkSession.builder.appName("udf_example").getOrCreate()
 
-# Initialize inflect engine
 p = inflect.engine()
 
 # Step 1: Write a normal Python function
-def num_to_words(num):
+def func(num: int) -> str:
     if num is None:
         return None
     return p.number_to_words(num)
 
+
 # Step 2: Register it as a Spark UDF
-num_to_words_udf = udf(num_to_words, StringType())
+func_registered = udf(func, str)
+
 
 # Example DataFrame
 data = [(123,), (45,), (None,), (1001,)]
 df = spark.createDataFrame(data, ["num"])
 
-# Step 3: Apply UDF on a column
-df.withColumn("num_in_words", num_to_words_udf("num")).show(truncate=False)
 
+# Step 3: Apply UDF on a column
+df.withColumn("num_in_words", func_registered("num")).show(truncate=False)
+
+# -----------------------------------------------------------------------------------------
 
 """
 Summary:

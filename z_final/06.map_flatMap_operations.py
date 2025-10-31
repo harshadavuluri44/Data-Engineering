@@ -43,19 +43,9 @@ DIFF B/W MAP() AND FLATMAP() IN SPARK
     Applies function to each partition independently (instead of each element)
     Useful when expensive setup needs to be done once per partition
 
-syntax :- rdd.mapPartitions(func)
-
-Example:
-def func(iterator):
-    result=[]
-    for x in iterator:
-        result.append(x*2)
-    return result
-
 mapped_rdd = rdd.mapPartitions(func)
 
-mapPartitions can return multiple elements not like map
-mapPartitions return flattened output for each record
+mapPartitions is like flatMap, it can return multiple elements and a flattened result
 
 ----------------------------------------------------------------------------------------------
 

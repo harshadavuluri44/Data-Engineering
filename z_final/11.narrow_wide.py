@@ -16,20 +16,12 @@ Examples: .groupBy(), .join(), .reduceByKey(), .distinct()
 --------------------------------------------------------------------------------------------------
 Key Differences:
 
-1. Shuffle:
-      Narrow: No shuffle required
-      Wide: Shuffle required
+Aspect	     Narrow Transformation	                  Wide Transformation
 
-2. Performance:
-      Narrow: Faster
-      Wide: Slower due to shuffle overhead
-
-3. Fault Tolerance:
-      Narrow: Quick recovery (can recompute only affected partitions)
-      Wide: Slower recovery (requires recomputing shuffled data)
-
-4. Memory Usage:
-      Narrow: Constant memory per partition
-      Wide: Memory usage can vary depending on size of partition; may cause OOM, data skew, etc.
+Shuffle	     No shuffle required	                  Shuffle required
+Performance	     Faster	                                    Slower (due to shuffle overhead)
+Fault Tolerance  Quick recovery                             Slower recovery
+                 (recompute only affected partitions)	      (recompute shuffled data)
+Memory Usage     Constant per partition	                  Can vary; may cause OOM or data skew
 
 """

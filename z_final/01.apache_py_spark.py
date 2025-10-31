@@ -21,7 +21,7 @@ DIFFERENCES
    Whereas Spark natively is written in Scala
 
 2. Performance is Slower incase of PySpark due to python code should be converted to JVM bytecode
-   as spark is written on java
+   as spark runs on JVM
 
 3. Ease of use, less code, more libraries available in python
 

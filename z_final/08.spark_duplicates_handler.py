@@ -8,7 +8,7 @@ How to handle duplicates in Spark ?
 
 df_d = df.dropDuplicates()
 
-Removes all duplicates row by maintaing one occurence
+Removes all duplicate rows by maintaing one occurence
 
 --------------------------------------------------------------------------------------------------
 
@@ -20,9 +20,7 @@ df_d = df.dropDuplicates(['id','name'])
 
 3. use distinct() for all columns
 
-df_d = df.distinct()
-
-Simpler and same as df.dropDuplicates() with all columns
+df_d = df.distinct()   # Returns new dataframe without duplicate rows
 
 ------------------------------------------------------------------------------------------------
 

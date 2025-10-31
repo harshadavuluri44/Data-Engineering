@@ -22,7 +22,7 @@ df.groupBy('name').agg(sum(col('salary')).alias('total_salary')).show()
 
 USING SPARK SQL
 
-# Register DataFrame as a temporary table
+# Register DataFrame as a temporary table/ view   (MANDATORY)
 
 df.createOrReplaceTempView('employees')
 
@@ -33,6 +33,5 @@ spark.sql('SELECT name, SUM(salary) AS total_salary FROM employees GROUP BY name
 ----------------------------------------------------------------------------------------------------
 
 Spark SQL queries also benfit from Catalyst Optimization, just like DataFrame API.
-
 
 '''
