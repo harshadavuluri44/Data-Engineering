@@ -23,7 +23,6 @@ Helps to answer questions like who, what, when, where, how
 Star Schema
 
 A central fact table with multiple dimension tables directly linked
-Looks like a star shape after tables are connected
 Dimension tables are denormalized, which increases redundancy but enables fast querying
 
 -------------------------------------------------------------------------------------------------
