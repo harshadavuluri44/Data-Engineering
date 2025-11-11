@@ -2,41 +2,50 @@
 
 How to handle duplicates in Spark ?
 
+DEDEPULICATION means removing the duplicates.
+
 --------------------------------------------------------------------------------------------------
 
-1. Remove exact duplicates (all columns match)
+1. Using dropDuplicates()
 
+# Drop all exact duplicate rows
 df_d = df.dropDuplicates()
 
-Removes all duplicate rows by maintaing one occurence
 
---------------------------------------------------------------------------------------------------
-
-2. Remove duplicates based on specific columns
+# drop duplicates based on specific columns
 
 df_d = df.dropDuplicates(['id','name'])
 
 -------------------------------------------------------------------------------------------------
 
-3. use distinct() for all columns
+2. Using distinct()
 
-df_d = df.distinct()   # Returns new dataframe without duplicate rows
+# Drop all exact duplicate rows, works same as df.dropDuplicates()
+df_d = df.distinct()
 
 ------------------------------------------------------------------------------------------------
 
-4. Keep the latest record when duplicates exist
+3. Using Window and row_number()
 
 from pyspark.sql.window import Window
 from pyspark.sql.functions import row_number
 
-windowspec = Window.partitionBy('id').orderBy(df['updated_at'].desc())
+windowspec = Window.partitionBy('id','name').orderBy(df['updated_at'].desc())
 
 df_f = df.withColumn('row_num', row_number().over(windowspec)).filter('row_num==1').drop('row_num')
 
 -------------------------------------------------------------------------------------------------
 
-Depends the business logic
 
-deduplication means removing the duplicates
+Among the above ways, which is more efficient and why?
+
+
+dropDuplicates() is Most efficient -
+
+    Uses optimized aggregation by dropping duplicates across the each partition first.
+
+distinct() does global distinct for each row across all partitions.
+
+window() involves shuffling + sorting + windowing
 
 '''
