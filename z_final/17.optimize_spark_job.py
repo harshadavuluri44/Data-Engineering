@@ -19,7 +19,6 @@ How do you optimize PySpark code in production pipelines?
 
 4) Minimize shuffle operations:
       Prefer broadcast joins for small tables (<200 MB) using broadcast().
-   Example: from pyspark.sql.functions import broadcast
 
 5) Use DataFrames/Datasets over RDDs:
       DataFrames benefit from Catalyst Optimizer and Tungsten execution engine.
