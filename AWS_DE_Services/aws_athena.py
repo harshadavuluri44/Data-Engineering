@@ -1,5 +1,7 @@
 '''
 
+Amazon Athena  ~  Azure Synapse Analytics  ~  Databricks SQL warehouse
+
 (BIGGEST NOTE :- We cant directly query s3 files using S3 path, we need to create database,
 table in Athena using S3 location, then do queries. Each query writes result to configured
 s3 path as CSV file)

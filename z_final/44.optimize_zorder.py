@@ -55,5 +55,34 @@ in Delta LOG and older than the RETAIN period
 
 NOTE :- It does NOT delete data from table.
 
+-------------------------------------------------------------------------------------------
+
+How OPTIMIZE and ZORDER works Internally ?
+
+
+1. Compaction  OPTIMIZE my_table;
+
+
+Spark scans metadata to identify small files in each partition
+
+Spark read those files in parallel. (i.e writes them into worker nodes storage)
+
+Combines them into new, large Parquet files (typically 1GB)
+
+Writes new files back to storage
+
+Mark old files as remove in _delta_log, but doesn't delete (VACUUM does that)
+
+
+2. OPTIMIZE my_table ZORDER By (col1, col2);
+
+After compaction,
+
+For each row, Delta computes a  Z-value, later Z-order curve.
+
+Rows are sorted by this Z-value.
+
+Rows with similar values end up stored physically close together inside the file.
+
 
 '''
