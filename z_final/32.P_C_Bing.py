@@ -1,6 +1,6 @@
 '''
 
-PARTITIONING, CLUSTERING, BUCKETING, Z-ORDERING, LIQUID CLUSTERING
+PARTITIONING, CLUSTERING, BUCKETING, LIQUID CLUSTERING
 -------------------------------------------------------------------------------------------------
 
 PARTITIONING / HIVE PARTITIONING
@@ -54,30 +54,4 @@ Join with customer table bucketed on customer_id -> more efficient
 
 -------------------------------------------------------------------------------------------------
 
-Z-ORDERING
-
-A multi-dimensional clustering technique in Delta Lake that co-locates related data across multiple
-columns into the same physical blocks.
-
-PURPOSE: Optimizes queries with multiple filter conditions (multi-column predicates)
-
-EXAMPLE: sales(customer_id, product_id, sale_date, amount)
-OPTIMIZE sales ZORDER BY (customer_id, product_id)
-
--------------------------------------------------------------------------------------------------
-
-LIQUID CLUSTERING
-
-A dynamic, self-optimizing clustering method in Delta Lake (Databricks).
-
-NOTES:
-    Automatically reorganizes data for optimal query performance 
-    Reduces need for manual OPTIMIZE ... ZORDER BY
-
-EXAMPLE:
-Create Delta table with liquid clustering on customer_id
-As new data arrives, Delta automatically maintains clustering 
-on customer_id for faster queries
-
--------------------------------------------------------------------------------------------------
 '''
