@@ -144,6 +144,3 @@ SELECT *, SELECT *, ROW_NUMBER() OVER (PARTITION BY department ORDER BY salary D
 
 COALESCE(column_name, 0) replaces NULL values in column with 0
 ---------------------------------
-
-LEAD() looks forward for next row LEAD(column_name, offset, default value)
-LAG() looks backward for previous row LAG(column_name, offset, default value)

@@ -24,4 +24,24 @@ WHEN MATCHED THEN
     UPDATE SET t.col1 = s.col1, t.col2 = s.col2
 WHEN NOT MATCHED THEN
     INSERT (id, col1, col2) VALUES (s.id, s.col1, s.col2)
+
+
+OR
+
+Use dataframe approach
+
+spark.conf.set('spark.sql.sources.partitionOverwriteMode', 'dynamic')
+
+df = spark.read.format('parquet').load('source_location_s3')
+
+df.write.format('delta').mode('overwrite').partitionBy('date').saveAsTable('delta_table')
+------------------------------------------------------------------------------------------------
+
+
+mode('overwrite') + spark.sql.sources.partitionOverwriteMode = 'dynamic'
+
+    The above config implies, only partitions present in df and delta table gets overridden,
+not the whole table.
+                          
+
 '''

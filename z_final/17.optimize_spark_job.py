@@ -29,12 +29,24 @@ How do you optimize PySpark code in production pipelines?
       UDFs are black boxes and slower unless absolutely required.
 
 7) Enable Predicate Pushdown and Column Pruning:
-      Read only required columns: df.select("col1", "col2").
       Filter early in the pipeline to minimize scanned data.
+      Read only required columns: df.select("col1", "col2").
 
 8) Monitor and Tune jobs:
       Use Spark UI to identify slow stages, skewed partitions, and long shuffles.
       Optimize skewed joins (salting technique or skew join hints).
 
---------------------------------------------------------------------------------------------
+
+MORE POINTS :
+
+* Avoid collect(), take() on huge data to driver node
+* Control skew by salting, broadcast join, increase shuffle partitions
+* Use proper cluster sizing, for huge datasets use more executors (more parallelism),
+                                                   more memory (fewer spills)
+* Enable Adaptive Query Execution (AQE)
+      Auto optimizes shuffle partitions
+      Auto broadcast join when possible
+      Handles skew optimization
+
+
 """

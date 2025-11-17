@@ -36,6 +36,10 @@ df_f = df.withColumn('row_num', row_number().over(windowspec)).filter('row_num==
 
 -------------------------------------------------------------------------------------------------
 
+4. USE Delta Lake MERGE INTO instead of .mode('append') to avoid NULLS during data processing.
+
+-----------------------------------------------------------------------------------------------
+
 
 Among the above ways, which is more efficient and why?
 
