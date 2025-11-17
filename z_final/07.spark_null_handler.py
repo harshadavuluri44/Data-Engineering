@@ -12,7 +12,7 @@ df.filter(df['col_name'].isNotNull()).show()    # rows where col_name is not nul
 # 2. Drop missing values
 
 df.dropna().show()                              # drop rows with at least one null
-df.dropna(subset=['col1', 'col2']).show()       # drop rows where col1 or col2 is null
+df.dropna(subset=['col1', 'col2']).show()       # drop rows if either one of col1/ col2 is null
 
 # --------------------------------------------------------------------------------------------
 
@@ -20,6 +20,8 @@ df.dropna(subset=['col1', 'col2']).show()       # drop rows where col1 or col2 i
 
 df.fillna(0).show()                             # replace all numeric nulls with 0
 df.fillna({'col1': 0, 'col2': "NONE"}).show()   # replace nulls with col-specific values
+
+# calculate mean/ median/ mode and fill nulls with those values
 
 # --------------------------------------------------------------------------------------------
 

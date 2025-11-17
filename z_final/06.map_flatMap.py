@@ -2,7 +2,7 @@
 
 1. map() - Transformation
     
-    Applies a function to each element of RDD/ DataFrame
+    Applies a function to each element/each record of RDD/ DataFrame
     Output : one element per input element (1-to-1 mapping)
 
 syntax :- rdd.map(func)
@@ -80,5 +80,16 @@ Diff between groupByKey() and reduceByKey()
     groupByKey() -> complete shuffle happens to bring same key values together
     reduceByKey() -> aggregates first (local combine in each partition) and then shuffle
     Hence reduceByKey() is more efficient
+
+------------------------------------------------------------------------------------------------
+
+Q. map() vs mapPartitions() - when does on 'kill' cluster memory?
+
+
+Incase of map(), spark processes one record at a time, Spark feeds each row individually to your 
+function. Very low memory usage, so map() never kills cluster memory
+
+Incase of mapPartitions(), spark gives an interator containing entire partition to function, So in
+case of partition is skewed/ large it kills memory and causes OOM.
 
 '''

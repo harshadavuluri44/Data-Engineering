@@ -20,7 +20,7 @@ DIFFERENCES
 1. PySpark uses Python
    Whereas Spark natively is written in Scala
 
-2. Performance is Slower incase of PySpark due to python code should be converted to JVM bytecode
+2. Performance is slower incase of PySpark due to python code should be converted to JVM bytecode
    as spark runs on JVM
 
 3. Ease of use, less code, more libraries available in python
@@ -31,7 +31,7 @@ from pyspark.sql import sparkSession
 
 spark = sparkSession.builder.appName('test').getOrCreate()
 
----------------------------------------------------------------------------------------------
+--------------------------------------------------------------------------------------------------
 
 Started career with Spark 3.3.0 (11.3 LTS DBR)
 

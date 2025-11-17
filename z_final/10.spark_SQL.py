@@ -2,7 +2,7 @@
 
 WHAT is SPARK SQL?
 
-Spark SQL is a module in Apache Spark that allows you to query structured data using SQL syntax
+Spark SQL is a module in Apache Spark that allows to query structured data using SQL syntax
 
 It works on DataFrames and Datasets, enabling us to run SQL queries directly on Spark data.
 

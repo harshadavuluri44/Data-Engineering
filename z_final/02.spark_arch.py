@@ -35,7 +35,7 @@ Driver Program, Cluster Manager, and Executors.
 Key Benefits of Spark Architecture:
 
     In-memory processing for faster computation.
-    Distributed and parallel execution across nodes.
+    Distributed & parallel execution across nodes.
     Fault tolerance via RDD lineage.
     Much faster than traditional systems like Hadoop MapReduce.
 
