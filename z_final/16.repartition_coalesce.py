@@ -2,7 +2,7 @@
 Both repartition() and coalesce() are transformations used to change the number of partitions in
 Spark.
 
---------------------------------------------------------------------------------
+----------------------------------------------------------------------------------------------------
 DIFFERENCES:
 
 1. df_r = df.repartition(100)

@@ -8,21 +8,21 @@ How do you optimize PySpark code in production pipelines?
    
    Example: while writing data, always choose parquet unless there is a specific reason.
 
-2) Cache/Persist wisely:
+2) Use DataFrames/Datasets over RDDs:
+      DataFrames benefit from Catalyst Optimizer and Tungsten execution engine.
+      Provides better performance and less boilerplate code.
+
+3) Cache/Persist wisely:
       Use df.cache() or df.persist() only when the same DataFrame is reused multiple times.
       Avoid unnecessary caching to save cluster memory.
 
-3) Optimize partitions:
+4) Optimize partitions:
       Check number of partitions using df.rdd.getNumPartitions().
       Use repartition() for full shuffle (expensive but balances data evenly).
       Use coalesce() to reduce partitions without shuffle.
 
-4) Minimize shuffle operations:
+5) Minimize shuffle operations:
       Prefer broadcast joins for small tables (<200 MB) using broadcast().
-
-5) Use DataFrames/Datasets over RDDs:
-      DataFrames benefit from Catalyst Optimizer and Tungsten execution engine.
-      Provides better performance and less boilerplate code.
 
 6) Use built-in Spark SQL functions instead of UDFs:
       Spark SQL functions are optimized and benefit from Catalyst.

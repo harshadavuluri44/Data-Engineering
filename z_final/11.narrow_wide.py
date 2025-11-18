@@ -16,9 +16,9 @@ Examples: .groupBy(), .join(), .reduceByKey(), .distinct()
 --------------------------------------------------------------------------------------------------
 Key Differences:
 
-Aspect	     Narrow Transformation	                  Wide Transformation
+Aspect	        Narrow Transformation	                     Wide Transformation
 
-Shuffle	     No shuffle required	                  Shuffle required
+Shuffle	        No shuffle required	                     Shuffle required
 Performance	     Faster	                                    Slower (due to shuffle overhead)
 Fault Tolerance  Quick recovery                             Slower recovery
                  (recompute only affected partitions)	      (recompute shuffled data)
