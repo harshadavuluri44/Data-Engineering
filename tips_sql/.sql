@@ -1,6 +1,6 @@
 -- The AS keyword creates a temporary column alias for a column
 
--- NOT EQUAL TO :- != or <>
+-- NOT EQUAL TO :-  <>
 
 SELECT *, Name as CountryNAME FROM world.Country LIMIT 10;
 
@@ -136,11 +136,8 @@ SELECT * FROM ranked WHERE rn = 1;
 
 with QUALIFY (simpler)
 
-SELECT *, SELECT *, ROW_NUMBER() OVER (PARTITION BY department ORDER BY salary DESC) AS rn
+SELECT *, ROW_NUMBER() OVER (PARTITION BY department ORDER BY salary DESC) AS rn
       FROM employees
       QUALIFY rn=1;
 
 -------------------------------------------------------------------------------------------------
-
-COALESCE(column_name, 0) replaces NULL values in column with 0
----------------------------------

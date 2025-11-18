@@ -5,7 +5,7 @@ WITH t1 AS (
 
 SELECT AVG(salary) as median_salary
 FROM t1
-WHERE rn = (total_count + 1)/2 or rn = (total_count + 2)/2
+WHERE rn = (total_employees + 1)/2 or rn = (total_employees + 2)/2
 
 
 

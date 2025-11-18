@@ -4,4 +4,4 @@
 
 ------------------------------------------------------------------------
 
--- COALESCE(col_name, value)  -> It replaces NULL values in column with given value
+-- COALESCE(col_name, x)  -> It replaces NULL values in column with given x
