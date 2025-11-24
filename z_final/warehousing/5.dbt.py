@@ -52,7 +52,7 @@ Purpose:
 
 Purpose:
     Join multiple staging tables
-    Applu business logic
+    Apply business logic
     Handle Slowly changing dimensions
     Create reusable intermediate datasets
 
@@ -101,7 +101,7 @@ on_schema_merge = ignore -> ignore new columns
                   sync_all_columns -> add & drop columns to match model.
 
 
-We might use CASE WHEN THEN ELSE END (similar if else)
+We might use CASE WHEN THEN ELSE END (similar if else)`
 
 use COALESCE() to default value for null valued columns
 
