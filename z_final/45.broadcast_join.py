@@ -28,7 +28,7 @@ Default broadcast threshold in Spark is 10MB
 
 We can change the value by
 
-spark.conf.set('spark.sql.autoBroadcastJoinThreshold', '50MB)
+spark.conf.set('spark.sql.autoBroadcastJoinThreshold', '50MB')
 
 -------------------------------------------------------------------------------------------------
 
