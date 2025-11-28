@@ -8,18 +8,23 @@ PARTITIONING / HIVE PARTITIONING
 Splitting a large table into smaller physical directories/partitions based on the value of one or
 more columns.
 
-PURPOSE: Helps prune unnecessary data during queries -> faster reads
 
 EXAMPLE: Table - sales(year, month, country, amount)
 
-df.write.partitionBy("year").parquet("s3://bucket/sales/")
+df.write.format('delta').partitionBy('year').saveAsTable('sales')
 
-Partition by year -> creates directories:
-    /sales/year=2023/
-    /sales/year=2024/
+Now, files are stored in disk like this
+        /sales/
+            year=2023/
+            year=2024/
+            year=2025/
 
 SELECT * FROM sales WHERE year=2023 
-    only reads the /sales/year=2023/ partition
+    only reads the /sales/year=2023/ folder
+
+Purpose:
+    Faster queries and much cheaper
+    Efficient filtering based on WHERE clause
 
 -------------------------------------------------------------------------------------------------
 

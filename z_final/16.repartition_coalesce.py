@@ -19,9 +19,9 @@ DIFFERENCES:
         May cause uneven/skewed partitions.
         Faster and cheaper than repartition().
 
---------------------------------------------------------------------------------
-TIP:
+----------------------------------------------------------------------------------------------------
 
-    Doing repartition smartly before join operations can reduce shuffle cost and execution time.
+
+TIP:    Doing repartition smartly before join operations can reduce shuffle cost and execution time.
 
 '''

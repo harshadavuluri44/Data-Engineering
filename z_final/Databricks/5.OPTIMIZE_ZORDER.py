@@ -2,6 +2,10 @@
 
 What are OPTIMIZE and ZORDER?
 
+Optimize and Zorder are delta lake features only available on Databricks.
+
+---------------------------------------------------------------------------------------------------
+
 Both are performance optimization commands for Delta table in Databricks
 
 They help make queries faster and more efficient, especially on large datasets

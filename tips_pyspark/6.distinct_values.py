@@ -1,6 +1,8 @@
 '''
 
-count no.of distinct values in a column
+Count no.of distinct values in a column
+
+---------------------------------------------------------------------------------------------------
 
 
 from pyspark.sql.functions import countDistinct

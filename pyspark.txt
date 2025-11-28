@@ -17,22 +17,6 @@ df = spark.read.table('table_name')
 df = spark.read.format('delta').load(table_storage_location)
 
 table_storage_location :- s3 location which has delta log.
----------------------------------------------------------------------------------------------
-
-Read only custom rows instead of all the available from parquet or delta table
-
-from pyspark.sql.types import StructType(), StructField(), IntegerType(), StringType()
-
-custom_schema = StructField(
-    [
-        StructType('col_1',IntegerType(), True),
-        StructType('col_3',StringType(), True)
-    ]
-)
-
-df = spark.read.format('parquet').schema(custom_schema).load(file_path)
-
-df = spark.read.schema(custom_schema).table(table_name)
 ----------------------------------------------------------------------------------------------
 
 Write data from df to delta table or delta location
@@ -41,12 +25,6 @@ df.write.format('delta').mode('overwrite').saveAsTable('table_name')
 df.write.format('delta').mode('overwrite').save(table_storage_location)
 df.write.format('parquet').mode('overwrite').save(file_path)
 
-do partition while writing
-
-df.write.format('delta').partitionBy('col_1').mode('overwrite').saveAsTable('table_name')
-df.write.format('delta').partitionBy('col_1').mode('overwrite').save('table_storage_path')
-
-partitioning helps sql queries faster
 ---------------------------------------------------------------------------------------------
 
 df.show(n,truncate=False)

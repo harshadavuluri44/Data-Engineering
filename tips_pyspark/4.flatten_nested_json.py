@@ -65,7 +65,6 @@ schema = StructType([
 spark = SparkSession.builder.appName("FlattenNestedJSON").getOrCreate()
 df = spark.createDataFrame(data, schema=schema)
 
-print("=== Original Nested DataFrame ===")
 df.show(truncate=False)
 
 df_1=df.select('id', 'name', col('contact.email'), col('contact.phones'),'orders')
