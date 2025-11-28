@@ -4,13 +4,13 @@ What are OPTIMIZE and ZORDER?
 
 Optimize and Zorder are delta lake features only available on Databricks.
 
----------------------------------------------------------------------------------------------------
+------------------------------------------------------------------------------------------------------
 
 Both are performance optimization commands for Delta table in Databricks
 
 They help make queries faster and more efficient, especially on large datasets
 
----------------------------------------------------------------------------------------
+------------------------------------------------------------------------------------------------------
 
 Why do we need OPTIMIZE ?
 
@@ -27,21 +27,37 @@ OPTIMIZE fixes this by compacting many small parquet files into a few large file
 NOTE :- OPTIMIZE does not change how the data is ordered inside the files unless we explicitly
 use ZORDER
 
---------------------------------------------------------------------------------------------------
+------------------------------------------------------------------------------------------------------
 
-ZORDER
+Z-Ordering
 
-A multi-dimensional clustering technique that arranges related data across multiple columns so
-they sit close together in the same files.
+A multi-dimensional data clustering technique in Databricks Delta Lake that arranges related data across
+multiple columns to sit close together in the same set of files.
 
-After Delta Lake compacts small files into larger ones using OPTIMIZE, Z-ORDER reorganizes 
-the rows inside those files so that similar values (across chosen columns) are placed near 
-each other on disk.
+After Delta Lake compacts small files into larger ones using OPTIMIZE, Z-ORDER reorganizes the rows 
+inside those files so that similar values (across chosen columns) are placed near each other on disk.
 
 OPTIMIZE sales
 ZORDER BY (customer_id, product_id);
 
-------------------------------------------------------------------------------------------
+
+* APPLY Z-order on frequently queried columns
+
+AVoid Z-order when 
+        table is small (little benfit)
+        we don't filter frequently on column
+        if table is frequently updated/deleted (reordering is expensive)
+
+
+How Z Order works?
+
+After compaction by OPTIMIZE
+
+    i) For each row, Delta computes a  Z-value, later Z-order curve.
+    ii)Rows are sorted by this Z-value.
+    iii)Rows with similar values end up stored physically close together inside the file.
+
+------------------------------------------------------------------------------------------------------
 
 LIQUID CLUSTERING
 
@@ -77,16 +93,6 @@ Writes new files back to storage
 
 Mark old files as remove in _delta_log, but doesn't delete (VACUUM does that)
 
-
-2. OPTIMIZE my_table ZORDER By (col1, col2);
-
-After compaction,
-
-For each row, Delta computes a  Z-value, later Z-order curve.
-
-Rows are sorted by this Z-value.
-
-Rows with similar values end up stored physically close together inside the file.
 
 
 '''

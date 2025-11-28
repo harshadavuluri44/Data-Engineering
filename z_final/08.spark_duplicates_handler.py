@@ -36,7 +36,7 @@ df_f = df.withColumn('row_num', row_number().over(windowspec)).filter('row_num==
 
 -------------------------------------------------------------------------------------------------
 
-NOTE - In data processing, use Delta Laje MERGE INTO instead of .mode('append') to avoid NULLS
+NOTE - In data processing, use Delta Lake MERGE INTO instead of .mode('append') to avoid NULLS
 
 -----------------------------------------------------------------------------------------------
 

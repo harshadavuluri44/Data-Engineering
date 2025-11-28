@@ -16,6 +16,9 @@ Implementation in Databricks / Delta Lake:
 
 Use MERGE INTO (Upsert) command to perform incremental updates:
 
+MERGE DEFINITION :  Perform conditional INSERT, UPDATE or DELETE in a single statement by matching
+source and target data, i.e It updates matching records, insert new records or deletes old records.
+
 
 MERGE INTO target_table t
 USING source_table s
