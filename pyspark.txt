@@ -63,37 +63,8 @@ df.filter(df['age']>40 & df['salary']>35000).show()
 In pyspark - Python's and , or not allowed - Instead use & , |
 ----------------------------------------------------------------------------------------------
 
-df.withColumn('new_column_name', col('col_name')*0.75).show()
-
-df.withColumn('new_column_name, df['col_name']*0.75).show()
-
-.withColumn takes 2 arguments not keyword arguments
-----------------------------------------------------------------------------------------------
-
-df.groupBy('col_1').avg('col_2').show()
-
-use agg() to calculate more than 1 aggregation
-
-df.groupBy('col_1').agg(avg('col_2').alias('avg_salary'),
-                        sum('col_3').alias('sum_age')).show()
------------------------------------------------------------------------------------------------
-
-df.orderBy(col('col_1').desc()).show()
----------------------------------------------------------------------------------------------
-
-Drop one or more columns
-
-df.drop('col_1')
-df.drop(['col_1','col_2'])
-----------------------------------------------------------------------------------------------
-
 df.withColumnRenamed('col_name','new_col_name').show()
 ---------------------------------------------------------------------------------------------
-
-df.fillna(0) -> fills NULL with 0 only in int columns
-df.fillna(Dictionary)
-df.fillna(value,subset=['col_1','col_2'])
-----------------------------------------------------------------------------------------------
 
 To find mean of one column
 
@@ -121,39 +92,8 @@ df_1.union(df_2).show()  -  Combines both df's with duplicate rows
 NOTE :- df_1 and df_2 should have same columns and data types
 ----------------------------------------------------------------------------------------------
 
-rank() in python  -> creates a new column
-
-from pyspark.sql.functions import rank, col, desc
-from pyspark.sql.window import window
-
-window_spec = Window().partitionBy('col_1').orderBy(col('col_2').desc())
-
-df.withColumn('new_col', rank().over(window_spec)).show()
-----------------------------------------------------------------------------------------------
-
 partitionBy() is used for physcially organizing data in disk/ file/ file_path
 groupBy() is used for logically grouping data in dataframe
-----------------------------------------------------------------------------------------------
-
-WORKING OF JOINS
-
-Spark internally shuffles matching data from nodes to nodes based on col_name
-
-broadcast_join()  -> Instead of shuffling large dataframe across nodes (which is costlier), 
-spark send small df to all nodes and performs join
-
-df_large.join(broadcast(df_small) on='col_1', how='inner').show()
-----------------------------------------------------------------------------------------------
-
-explode() and explode_outer() -> returns each element in items_array as new row
-
-df.withColumn('items', explode(col('items_array'))).show()
-df.select('items_array', explode(col('items_array')).alias('items')).show()
-
-explode excludes null items_array
-explode_outer() includes null items_array
-
-IMP :- explode() takes only array or map columns but not struct columns {x,y,z}
 ----------------------------------------------------------------------------------------------
 
 PIVOT :- The distinct values in pivot_column becomes columns
@@ -164,28 +104,3 @@ EXPLANATION :- .groupBy() converts multiple rows of one student into one row/ st
                .pivot() converts all subjects into columns
                .agg(sum('score')) [mandatory with pivot]
 -----------------------------------------------------------------------------------------------
-
-DATA SKEW 
-
-1. A partition has significantly more rows or data than others.
-
-2. A partition has many rows with the same key/partition value, leading to uneven distribution.
-
-Why it’s bad: Data skew is a performance killer. If one worker gets a large partition, it 
-takes much longer to process compared to other workers. Even if the other workers finish quickly,
-Spark must wait for the slowest (skewed) partition before sending results to the driver.
-
-Fix the SKEW 1. repartition
-             2. broadcast join
-             3. Salting technique
-------------------------------------------------------------------------------------------------------
-
-NARROW TRANSFORMATIONS :- Does not involve any shuffle (filter, withColumn, select)
-
-WIDE TRANSFORMATIONS :- Involve shuffle (groupBy, Join)
-----------------------------------------------------------------------------------------------------
-
-df.createOrReplaceTempView('temp_view')
-
-Will not create anything in the Unity Catalog or Hive metastore. This temporary view is stored in 
-spark's memory catalog for current session/cluster

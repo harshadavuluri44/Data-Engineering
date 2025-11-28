@@ -70,25 +70,11 @@ Inbuilt Optimization in PySpark :- PySpark achieves high performance through 2 c
     * Optimizes memory and CPU efficiency at physcial execution level
     * Compiles whole  stage code to java bytecode
 
----------------------------------------------------------------------------------------------------------
+--------------------------------------------------------------------------------------------------------
 
-Cache() & persist() - Two powerful tools for performance optimization when you are working with reused data
-    * why we need chache() or persist()?
-    A. Every time we trigger an action, the entire transformation chain(DAG) is recomputed unless it's stored.
+Cache() & persist() 
 
-    Cache() - stores the DF in memory(RAM) after the first action is run
-    * It uses default storage level: MEMORY_AND_DISK
-
-    Persist() - it is more felixble than cache()
-    * we can choose how and where to store the data, we must specify the storage level, otherwise it behaves same as cache()
-
-    from pyspark import StorageLevel
-    df = df.persist(StorageLevel.MEMORY_ONLY) [MEMORY_ONLY, MEMORY_AND_DISK(default), DISK_ONLY, MEMORY_ONLY_SER(stpres serialized data in memory -> saves space), MEMORY_AND_DISK_SER]
-
-    *when should we use cache()/persist()?
-    A. when we want to reuse same DF in multiple actions to avoid recomputation for performance.
-
----------------------------------------------------------------------------------------------------------
+--------------------------------------------------------------------------------------------------------
 
 Immutable :- A core concept that ensures safety, reliability & fault tolerance in distributed computing.
     
