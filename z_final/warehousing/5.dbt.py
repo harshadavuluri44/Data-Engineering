@@ -113,7 +113,7 @@ ref() functions tells which model depends on which other model.
 in what order models should run
 
 
-DBT manages dependcies through the ref() function. When one model refrences another using ref(),
+DBT manages dependencies through the ref() function. When one model refrences another using ref(),
 DBT understands that the refrenced model must run first.
 
 DBT uses these ref() relationships to automatically buil a DAG - a Directed Acylic Graph that
