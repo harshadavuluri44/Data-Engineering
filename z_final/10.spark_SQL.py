@@ -32,6 +32,6 @@ spark.sql('SELECT name, SUM(salary) AS total_salary FROM employees GROUP BY name
 
 ----------------------------------------------------------------------------------------------------
 
-Spark SQL queries also benfit from Catalyst Optimization, just like DataFrame API.
+Spark SQL queries also benefit from Catalyst Optimization, just like DataFrame API.
 
 '''

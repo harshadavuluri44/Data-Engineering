@@ -1,4 +1,4 @@
-"""
+'''
 UDF = User Defined Function in PySpark
 
     A UDF is a custom Python function that we teach Spark to run on each row of a DataFrame column.
@@ -21,7 +21,6 @@ Example: Convert a number to its English words
 Spark doesn't have a built-in function to turn 123 into "one hundred twenty-three".
 We can do this with a UDF.
 
-"""
 
 from pyspark.sql import SparkSession
 from pyspark.sql.functions import udf
@@ -50,10 +49,12 @@ df = spark.createDataFrame(data, ["num"])
 # Step 3: Apply UDF on a column
 df.withColumn("num_in_words", func_registered("num")).show(truncate=False)
 
-# -----------------------------------------------------------------------------------------
+-----------------------------------------------------------------------------------------
 
-"""
+
 Summary:
     UDF is powerful for custom logic not available in Spark.
     But UDFs are slower because they cannot be optimized by Spark's Catalyst optimizer.
-"""
+
+    
+'''
