@@ -1,4 +1,19 @@
 """
+
+IMPORTANT POINTS on MEMORY OF NODE IN DBX CLUSTER
+
+
+Let's assume a driver node of i3.xlarge (i.e 30GB MEMORY)
+
+Now 30GB RAM is shared by:
+
+   Driver JVM heap (spark.driver.memory)
+   JVM overhead (spark.driver.memoryOverhead)
+   OS + Databricks services
+   Python
+   Native libs, GV, etc
+
+--------------------------------------------------------------------------------------------------
 Q: A Spark job keeps failing due to 'OutOfMemoryError'. How would you troubleshoot?
 
 
@@ -21,14 +36,14 @@ Important: Actions like `collect()` or `show()` pull data from executors to the 
 
 Increase driver memory if needed:
 
-      spark.driver.memory 10g
+      spark.driver.memory 28g
 
 -----------------------------------------------------------------------------------------------
 3. Executor OOM
 
    Increase executor memory and cores:
 
-      spark.executor.memory 8g
+      spark.executor.memory 28g
       spark.executor.cores 5
 
 

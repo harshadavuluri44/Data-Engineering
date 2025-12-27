@@ -46,7 +46,7 @@ MORE POINTS :
 * Enable Adaptive Query Execution (AQE)
       Auto optimizes shuffle partitions
       Auto broadcast join when possible
-      Handles skew optimization
+      Handles skew optimization (eg: groupBy aggregations)
 
 
 """

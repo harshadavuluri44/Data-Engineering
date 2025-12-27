@@ -2,10 +2,10 @@
 
 what is AQE(Adaptive Query Execution) in Spark 3.x?
 
-------------------------------------------------------------------------------------------------------
+---------------------------------------------------------------------------------------------------
 
-AQE is a runtime optimization in Spark 3.x, where Spark dynamically optimizes the query plan at runtime,
-after it has already started executing based on actual data statistics.
+AQE is a runtime optimization in Spark 3.x, where Spark dynamically optimizes the query plan at
+runtime, after it has already started executing based on actual data statistics.
 
 Normally, Spark makes an execution plan before running (logical -> physical plan). But it cannot
 predict actual data size until it runs and can't changes the plan based on data size and partitions
@@ -29,7 +29,7 @@ predict actual data size until it runs and can't changes the plan based on data 
     If one side of join turns out to be small, AQE can switch from sort-merge join to broadcast join 
     at runtime.
 
-3. Handling Skewed Data
+3. Handling Skewed Data (ex; groupBy aggregations)
 
     AQE can detect data skew (e.g., one partition has way more rows) and split the skewed partitions
     into smaller ones for better parallelism

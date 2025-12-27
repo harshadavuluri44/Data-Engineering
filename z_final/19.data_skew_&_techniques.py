@@ -6,7 +6,7 @@ Data Skew means when data is unevenly distributed across partitions in a cluster
 computing system like spark.
 
 i.e Some partitions have huge amount of data (hot partitions) and others have little data
-
+---------------------------------------------------------------------------------------------------
 
 Data Skew causes 
 
@@ -20,7 +20,7 @@ Example :
 If 90% of rows have country = 'US' and other countries make up rest, then:
     Partition holding US data will be huge
     That executor will take much longer time to finish spark job
-------------------------------------------------------------------------------------------------
+---------------------------------------------------------------------------------------------------
 
 How do you debug from spark UI to detect/confirm data skew ?
 
@@ -34,7 +34,7 @@ How do you debug from spark UI to detect/confirm data skew ?
 
         Then we can confirm the skew.
 
-------------------------------------------------------------------------------------------------
+---------------------------------------------------------------------------------------------------
 HANDLING DATA SKEW 
 
 Scenario : Fact table has skew on customer_id, Please find the total amount spent for each customer.
