@@ -2,14 +2,14 @@
 Narrow vs Wide Transformations in Spark
 
 Narrow Transformations:
-   Each task/partition can be processed independently without requiring data from other partitions.
+   Each task/partition can be transformed independently without requiring data from other partitions.
    Does NOT require a shuffle.
 
 Examples: .withColumn(), .filter(), .map(), .select()
 
 -------------------------------------------------------------------------------------------------
 Wide Transformations:
-   Processing a task/partition may require data from multiple partitions, triggering a shuffle.
+   Transforming a task/partition may require data from multiple partitions, triggering a shuffle.
 
 Examples: .groupBy(), .join(), .reduceByKey(), .distinct()
 

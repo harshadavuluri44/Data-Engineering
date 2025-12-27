@@ -3,7 +3,7 @@
 JOB:
 
      A job in Spark is the execution of the DAG corresponding to an action.
-     It is triggered when an action (like `count()`, `collect()`, `write()`) is called on a DataFrame
+     It is triggered when an action (like .count(), .collect(), .write()) is called on a DataFrame
      or RDD.
      Each job is divided into stages, and each stage contains tasks that run in parallel on partitions.
 
