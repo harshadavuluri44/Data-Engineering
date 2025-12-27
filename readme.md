@@ -1,18 +1,6 @@
-Apache Spark is an open source unified analytics engine used for large scale data processing
-
-PySpark is a powerful open-source framework built on Apache Spark, desifned to simplify and accelerate large-scale data processing and analytics tasks. It offers a high-level API for python programming language, enabling seamless integration with existing python ecosystems.
-
-
-df = SparkSession.builder.appName("test_harsha").getOrCreate()
-* test_harsha is name of the Spark application
-* This name(test_harsha) appears in Spark UI (under "Application Name column), Logs
-
-* It helps identify easily when running multiple Spark applications, good for debugging, monitoring and logging in production environments
-
-* getOrCreate() - Either creates a new Spark session or returns the existing one if already created
 
 Features of pyspark
----------------------------------------------------------------------------------------------------------
+----------------------------------------------------------------------------------------------------
 
 In-Memory Computation :-
     Pyspark processes data in memory (RAM) instead of reading from disk every time, which significantly imporves performance for iterative or repated operations like aggregations and ML
@@ -27,7 +15,7 @@ In-Memory Computation :-
        -> If .cache() or .persist() is used stores the result in memory(on executors),
        -> and resues that results for further actions.
 
----------------------------------------------------------------------------------------------------------
+--------------------------------------------------------------------------------------------------
 
 LAZY EVALUATION - PySpark use lazy evaluation, which means transformations are not executed immediately.
     Instead they are recorded as a plan to be executed only when an action is called.
@@ -57,7 +45,7 @@ LAZY EVALUATION - PySpark use lazy evaluation, which means transformations are n
 
 Final High level understanding of Lazy Evaluation :- Transformations in PySpark are not executed immediately. Instead, they are recorded as a chain of operations, forming a Directed Acyclic Graph (DAG). When an action is called, the Catalyst Optimizer generates an optimized logical plan from this DAG. The optimized plan is then executed by the DAG Scheduler, which breaks it into stages and tasks to run on executors.
 
----------------------------------------------------------------------------------------------------------
+--------------------------------------------------------------------------------------------------
 
 Inbuilt Optimization in PySpark :- PySpark achieves high performance through 2 core optimization components
 
@@ -70,11 +58,7 @@ Inbuilt Optimization in PySpark :- PySpark achieves high performance through 2 c
     * Optimizes memory and CPU efficiency at physcial execution level
     * Compiles whole  stage code to java bytecode
 
---------------------------------------------------------------------------------------------------------
-
-Cache() & persist() 
-
---------------------------------------------------------------------------------------------------------
+---------------------------------------------------------------------------------------------------
 
 Immutable :- A core concept that ensures safety, reliability & fault tolerance in distributed computing.
     
@@ -91,7 +75,7 @@ Immutable :- A core concept that ensures safety, reliability & fault tolerance i
     NOTE :- Unlike Pandas, PySpark does not support in-place operations.
     There is no inplace=True parameter in PySpark methods - everything returns a new DataFrame
 
----------------------------------------------------------------------------------------------------------
+-----------------------------------------------------------------------------------------------------
 
 Fault Tolerant :- If something goes wrong(like a node crashes or a task fails), Spark can recover and still finish the job correctly, without restarting everything from the beginning.
     Q. How Does PySpark achieve fault tolerance?
@@ -109,7 +93,7 @@ Fault Tolerant :- If something goes wrong(like a node crashes or a task fails), 
 
     If a worker fails after writing those files, Spark can re-fetch them from another node or recreate them using lineage - not from scratch,
 
----------------------------------------------------------------------------------------------------------
+-----------------------------------------------------------------------------------------------------
 
 Cluster managers in PySpark :- A cluster manager is like boss of the Spark ecosystem. It is responsible for 1. Allocating resources (CPU, memory) across the cluster
     2. Launching executors(worker nodes)
@@ -130,4 +114,4 @@ Cluster Managers supported by PySpark :- 1. Spark Standalone - Spark's built-in 
                                 
 spark = SparkSession.builder.master("yarn").appName("test_harsha").getOrCreate()
 
----------------------------------------------------------------------------------------------------------
+-----------------------------------------------------------------------------------------------------

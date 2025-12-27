@@ -1,9 +1,8 @@
-"""
+'''
+
 Apache Spark Code Execution Flow
 
-Step-by-step flow of how a Spark application executes:
-
------------------------------------------------------------------------------------------------------
+-------------------------------------------------------------------------------------------------
 
 1. Write Code
 2. SparkSession / SparkContext Created
@@ -27,10 +26,8 @@ Step-by-step flow of how a Spark application executes:
 8. Results returned to Driver
 9. Job Completed
 
-
-      
------------------------------------------------------------------------------------------------------
-
+  
+--------------------------------------------------------------------------------------------------
       
 Q.    Explain what happens when you run this PySpark code:
       
@@ -47,4 +44,5 @@ Q.    Explain what happens when you run this PySpark code:
       4th one  action, once triggered, spark convertes logical plan into optimal physical
       plan and reads only required data based on filtes and do grouping, then writes 
       data to storage/table
-"""
+
+'''

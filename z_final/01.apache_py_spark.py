@@ -27,9 +27,9 @@ DIFFERENCES
 
 --------------------------------------------------------------------------------------------------
 
-from pyspark.sql import sparkSession
+from pyspark.sql import SparkSession
 
-spark = sparkSession.builder.appName('test').getOrCreate()
+spark = SparkSession.builder.appName('test').getOrCreate()
 
 --------------------------------------------------------------------------------------------------
 
