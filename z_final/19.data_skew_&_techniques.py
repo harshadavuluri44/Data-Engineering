@@ -43,7 +43,7 @@ Scenario : Fact table has skew on customer_id, Please find the total amount spen
 
 STEP 1: Add a salt key to spread skewed customer_ids across partitions
 
-        from pyspark.sql.functions import col, rand, floor,
+        from pyspark.sql.functions import col, rand, floor
 
         N=50  # number of salts
 

@@ -5,7 +5,7 @@ about data, rather than the data itself.
 
 This includes tables definitions, column types, partitions, ownership, lineage and version history
 
-
+--------------------------------------------------------------------------------------------------
 
 Efficient query performance
 
@@ -27,6 +27,6 @@ Data lineage & auditing
 
 Time travel / versioning support
 
-    Stores historical snapshots of data for rollbakc or analysis of past states
+    Stores historical snapshots of data for rollback or analysis of past states
 
 '''
