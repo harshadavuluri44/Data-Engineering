@@ -57,7 +57,7 @@ After compaction by OPTIMIZE
     ii)Rows are sorted by this Z-value.
     iii)Rows with similar values end up stored physically close together inside the file.
 
-------------------------------------------------------------------------------------------------------
+---------------------------------------------------------------------------------------------------
 
 LIQUID CLUSTERING
 
@@ -66,7 +66,7 @@ A dynamic, self-optimizing clustering method in Delta Lake (Databricks).
 Automatically reorganizes data for optimal query performance 
 Reduces need for manual OPTIMIZE ... ZORDER BY
 
------------------------------------------------------------------------------------------
+--------------------------------------------------------------------------------------------------
 
 VACUUM
 
@@ -75,7 +75,7 @@ in Delta LOG and older than the RETAIN period
 
 NOTE :- It does NOT delete data from table.
 
--------------------------------------------------------------------------------------------
+--------------------------------------------------------------------------------------------------
 
 How OPTIMIZE and ZORDER works Internally ?
 

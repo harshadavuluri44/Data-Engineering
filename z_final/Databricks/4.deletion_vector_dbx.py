@@ -44,14 +44,14 @@ What is a Deletion Vector?
 
 Important Notes:
 
-VACUUM:
-    Does NOT delete rows inside parquet files if other rows are still alive.
-    Only deletes entire parquet files if they are completely unreferenced in the Delta log.
-
 OPTIMIZE:
     Creates a new compacted parquet file containing only alive rows.
     The old parquet file becomes unreferenced by the Delta log and is eventually removed by VACUUM.
     This resembles the traditional method but does not occur on every DELETE/UPDATE.
+
+VACUUM:
+    Does NOT delete rows inside parquet files if other rows are still alive.
+    Only deletes entire parquet files if they are completely unreferenced in the Delta log.
 
 --------------------------------------------------------------------------------------------------
 
