@@ -30,46 +30,47 @@
 
 5. Reduce Subqueries
 
-Use JOINs instead of correlated subqueries where possible.
+    Use JOINs instead of correlated subqueries where possible.
 
--- Slow
-SELECT name FROM customers c
-WHERE EXISTS (SELECT 1 FROM orders o WHERE o.customer_id = c.id)
+    -- Slow
+    SELECT name FROM customers c
+    WHERE EXISTS (SELECT 1 FROM orders o WHERE o.customer_id = c.id)
 
--- Faster
-SELECT DISTINCT c.name
-FROM customers c
-JOIN orders o ON o.customer_id = c.id
+    -- Faster
+    SELECT DISTINCT c.name
+    FROM customers c
+    JOIN orders o ON o.customer_id = c.id
 
 6. Limit Data
 
-Use LIMIT / TOP if only a subset is needed.
+    Use LIMIT / TOP if only a subset is needed.
 
-Partition large tables: Query only relevant partitions.
+    Partition large tables: Query only relevant partitions.
 
 7. Analyze Execution Plans
 
-Use EXPLAIN (MySQL, PostgreSQL) or EXPLAIN PLAN (Oracle) to see how SQL engine executes queries.
+    Use EXPLAIN (MySQL, PostgreSQL) or EXPLAIN PLAN (Oracle) to see how SQL engine executes queries.
 
-Identify table scans, missing indexes, and costly operations.
+    Identify table scans, missing indexes, and costly operations.
 
 8. Optimize Updates & Deletes
 
-Batch operations: Avoid updating/deleting millions of rows in a single query.
+    Batch operations: Avoid updating/deleting millions of rows in a single query.
 
-Filter precisely: Use indexed columns in WHERE.
+    Filter precisely: Use indexed columns in WHERE.
 
 9. Consider Caching & Materialized Views
 
-Materialized views: Precompute heavy joins or aggregations.
+    Materialized views: Precompute heavy joins or aggregations.
 
-Query caching: Some DBs cache query results for faster retrieval.
+    Query caching: Some DBs cache query results for faster retrieval.
 
 10. Database-Specific Optimizations
 
-Partitioning: Horizontal or vertical partitioning of large tables.
+    Partitioning: Horizontal or vertical partitioning of large tables.
 
-Proper data types: Smaller, appropriate data types reduce I/O.
+    Proper data types: Smaller, appropriate data types reduce I/O.
 
-Use hints (if needed): In databases like Oracle, you can give the optimizer hints for joins or indexes.
+    Use hints (if needed): In databases like Oracle, you can give the optimizer hints for joins or indexes.
+
 '''

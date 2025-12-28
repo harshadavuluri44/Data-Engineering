@@ -12,13 +12,13 @@ Common fact table columns:
     Units_Sold    Fact measure
     Revenue       Fact measure
 
------------------------------------------------------------------------------------------------
+--------------------------------------------------------------------------------------------------
 Dimension Table
 
 Stores descriptive, textual information about business entities
 Helps to answer questions like who, what, when, where, how
 
-------------------------------------------------------------------------------------------------
+--------------------------------------------------------------------------------------------------
 
 Star Schema
 

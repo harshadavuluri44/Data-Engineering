@@ -2,7 +2,7 @@
 
 ACID properties that make Delta Lake (and other Lakehouse systems like Apache Hudi, Apache Iceberg) 
 reliable, unlike a raw data lake.
------------------------------------------------------------------------------------
+---------------------------------------------------------------------------------------------------
 
 1. ATOMICITY (A): A transaction is all-or-nothing.
 
