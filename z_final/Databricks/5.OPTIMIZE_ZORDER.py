@@ -17,11 +17,9 @@ Why do we need OPTIMIZE ?
 When Delta tables are updated or appended frequently, many small parquet files get created in table's
 storage location.
 
-These small files cause:
-    slow query performance
+These small files cause: slow query performance
 
     
-
 OPTIMIZE fixes this by compacting many small parquet files into a few large files.
 
 NOTE :- OPTIMIZE does not change how the data is ordered inside the files unless we explicitly
@@ -31,8 +29,8 @@ use ZORDER
 
 Z-Ordering
 
-A multi-dimensional data clustering technique in Databricks Delta Lake that arranges related data across
-multiple columns to sit close together in the same set of files.
+A multi-dimensional data clustering technique in Databricks Delta Lake that arranges related data 
+across multiple columns to sit close together in the same set of files.
 
 After Delta Lake compacts small files into larger ones using OPTIMIZE, Z-ORDER reorganizes the rows 
 inside those files so that similar values (across chosen columns) are placed near each other on disk.
@@ -63,7 +61,17 @@ LIQUID CLUSTERING
 
 A dynamic, self-optimizing clustering method in Delta Lake (Databricks).
 
-Automatically reorganizes data for optimal query performance 
+CREATE TABLE sales_data (
+  order_id STRING,
+  customer_id STRING,
+  order_date DATE,
+  amount DOUBLE
+)
+USING DELTA
+CLUSTER BY (customer_id, order_date);
+
+
+Automatically reorganizes data for optimal query performance
 Reduces need for manual OPTIMIZE ... ZORDER BY
 
 --------------------------------------------------------------------------------------------------
